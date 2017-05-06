@@ -3,7 +3,7 @@ package com.learn.filters;
 
 import com.learn.exception.ErrorMessage;
 import com.learn.exception.IllegalRequestException;
-import com.learn.model.Result;
+import com.learn.model.base.Result;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.container.ContainerRequestContext;
