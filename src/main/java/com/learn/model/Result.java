@@ -1,4 +1,4 @@
-package com.learn.model.base;
+package com.learn.model;
 
 /**
  * Created with IntelliJ IDEA.
