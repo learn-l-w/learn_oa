@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class DemoServiceTest extends BaseTest {
 
+    // TODO: learn_1.9 每个业务都应该有自己的单元测试，非必须，但规范的项目中都有单元测试
+
     @Autowired
     private DemoService demoService;
 

@@ -108,6 +108,7 @@
         <property name="mapperLocations" value="classpath*:mybatis/*.*"/>
     </bean>
 
+    <!--todo learn_1.1 需要手动把你的dao注入到spring中-->
     <bean id="demoDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="mapperInterface" value="com.learn.dao.DemoDao"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>

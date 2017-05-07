@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--todo learn_1.2 需要指定你的Mapper所对应的java bean-->
 <mapper namespace="com.learn.dao.DemoDao">
+    <!--todo learn_1.3 数据库里字段和java bean的对应关系（也就是映射） -->
     <resultMap id="BaseResultMap" type="com.learn.model.Demo">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
@@ -9,7 +11,7 @@
         <result column="time" property="time" jdbcType="INTEGER"/>
         <result column="update_time" property="updateTime" jdbcType="INTEGER"/>
     </resultMap>
-
+    <!--todo learn_1.4 id 要与dao中的函数名一致 -->
     <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         *
@@ -55,6 +57,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
+    <!--todo learn_1.5 项目中的删除一律用软删除，就是用del标记位 -->
     <update id="delete" parameterType="java.lang.Integer">
         update demo
         set del = 1

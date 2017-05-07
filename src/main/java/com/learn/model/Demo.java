@@ -10,6 +10,8 @@ import com.learn.model.base.BaseModel;
  */
 public class Demo extends BaseModel {
 
+    // TODO: learn_1.0 理论上说所有实体都应该有一些共同里的属性，所以提出来个父类，继承就行
+
     private String title;
     private String desc;
 

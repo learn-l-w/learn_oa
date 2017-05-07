@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface DemoDao {
-
+    // TODO: learn_1.6 dao的注解是Mapper
     Demo selectById(int id);
 
     int insert(Demo demo);

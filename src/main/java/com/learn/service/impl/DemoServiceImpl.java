@@ -14,6 +14,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DemoServiceImpl implements DemoService {
+
+    // TODO: learn_1.7 service的注解是Service
+    // TODO: service层写主要逻辑
+
     @Autowired
     private DemoDao demoDao;
 

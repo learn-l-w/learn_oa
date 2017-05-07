@@ -26,6 +26,10 @@ public class DemoController extends BaseController {
     @Autowired
     private DemoService demoService;
 
+    // TODO: learn_1.8 注意controller类和函数的注解
+    // TODO 一般来说，查询用get，对数据修改用post
+    // TODO controller中尽量不要写逻辑，逻辑写到service中去
+
     @GET
     @Path("/detail")
     public Demo detail(@QueryParam("id") int id) {
