@@ -10,4 +10,10 @@ import com.learn.model.Demo;
  */
 public interface DemoService {
     Demo selectById(int id);
+
+    void delete(int id);
+
+    void insert(Demo demo);
+
+    void update(Demo demo);
 }

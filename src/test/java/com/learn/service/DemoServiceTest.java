@@ -23,4 +23,26 @@ public class DemoServiceTest extends BaseTest {
         assert demo != null;
     }
 
+    @Test
+    public void testInsert() {
+        Demo demo = new Demo();
+        demo.setDesc("dssdf");
+        demo.setTitle("xcvc");
+        demoService.insert(demo);
+    }
+
+    @Test
+    public void testUpdate() {
+        Demo demo = new Demo();
+        demo.setId(1);
+        demo.setDesc("fhdfgj");
+        demo.setTitle("gfbvn");
+        demoService.update(demo);
+    }
+
+    @Test
+    public void testDelete() {
+        demoService.delete(1);
+    }
+
 }

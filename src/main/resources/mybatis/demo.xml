@@ -16,4 +16,49 @@
         from demo
         where id = #{id,jdbcType=INTEGER}
     </select>
+
+    <insert id="insert" parameterType="com.learn.model.Demo" useGeneratedKeys="true" keyProperty="id">
+        insert into demo
+        (
+        <if test="title != null">
+            title,
+        </if>
+        <if test="desc != null">
+            `desc`,
+        </if>
+        update_time,
+        time)
+        values (
+        <if test="title != null">
+            #{title,jdbcType=VARCHAR},
+        </if>
+        <if test="desc != null">
+            #{desc,jdbcType=VARCHAR},
+        </if>
+        unix_timestamp(),
+        unix_timestamp())
+    </insert>
+
+    <update id="update" parameterType="com.learn.model.Demo">
+        update demo
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="desc != null">
+                `desc` = #{desc,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = unix_timestamp(),
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="delete" parameterType="java.lang.Integer">
+        update demo
+        set del = 1
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
 </mapper>

@@ -11,5 +11,12 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface DemoDao {
+
     Demo selectById(int id);
+
+    int insert(Demo demo);
+
+    int update(Demo demo);
+
+    int delete(int id);
 }

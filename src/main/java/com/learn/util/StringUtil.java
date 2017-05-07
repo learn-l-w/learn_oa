@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -140,6 +141,16 @@ public class StringUtil {
             return null;
         }
         return string.replaceAll("\\pP|\\pS", "");
+    }
+
+    public static ArrayList<String> explode(String string, String separator) {
+        if (string == null || string.length() == 0) {
+            return null;
+        }
+        String[] array = string.split(separator);
+        ArrayList<String> result = new ArrayList<String>();
+        Collections.addAll(result, array);
+        return result;
     }
 
 }

@@ -21,4 +21,19 @@ public class DemoServiceImpl implements DemoService {
     public Demo selectById(int id) {
         return demoDao.selectById(id);
     }
+
+    @Override
+    public void delete(int id) {
+        demoDao.delete(id);
+    }
+
+    @Override
+    public void insert(Demo demo) {
+        demoDao.insert(demo);
+    }
+
+    @Override
+    public void update(Demo demo) {
+        demoDao.update(demo);
+    }
 }
