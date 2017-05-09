@@ -17,6 +17,7 @@ public class User extends BaseModel {
     private String phone;
     private String qq;
     private String password;
+    private String newpassword;
 
     public User() {
     }
@@ -59,6 +60,14 @@ public class User extends BaseModel {
 
     public void setQq(String qq) {
         this.qq = qq;
+    }
+
+    public String getNewpassword() {
+        return newpassword;
+    }
+
+    public void setNewpassword(String newpassword) {
+        this.newpassword = newpassword;
     }
 
 }

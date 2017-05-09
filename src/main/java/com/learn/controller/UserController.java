@@ -1,14 +1,18 @@
 package com.learn.controller;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.learn.model.Demo;
 import com.learn.model.User;
 import com.learn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -29,7 +33,7 @@ public class UserController extends BaseController{
 
     @GET
     @Path("/login")
-    public User look(@QueryParam("password") int password){
+    public User look(@QueryParam("password") String password){
        return uService.look(password);
     }
 
@@ -37,5 +41,21 @@ public class UserController extends BaseController{
     @Path("/look")
     public User lookById(@QueryParam("id") int id){
         return uService.lookById(id);
+    }
+
+    @POST
+    @Path("/detail")
+    public Map<String,Object> detail(JsonNode jsonnode){
+        User u = getDemoByJson(jsonnode);
+        uService.detail(u);
+        return returnMap(KEY_RESULT, "1");
+    }
+
+    private User getDemoByJson(JsonNode jsonnode) {
+        User user = new User();
+        user.setId(getJsonInt(jsonnode, "id", false));
+        user.setPassword(getJsonText(jsonnode,"password",false));
+        user.setNewpassword(getJsonText(jsonnode,"newpassword",false));
+        return user;
     }
 }

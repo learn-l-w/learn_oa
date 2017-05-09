@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService{
     private UserDao uDao;
 
     @Override
-    public User look(int password) {
+    public User look(String password) {
         User s = uDao.selectByPassword(password);
         if (s==null){
             throw new LearnException("账号或密码错误");
@@ -35,5 +35,15 @@ public class UserServiceImpl implements UserService{
             throw new LearnException("此用户id不存在");
         }
         return u;
+    }
+
+    @Override
+    public void detail(User u) {
+        User us = uDao.selectByPassword(u.getPassword());
+        if(us==null){
+            throw new LearnException("账号或密码错误");
+        }else{
+            uDao.update(u);
+        }
     }
 }

@@ -12,9 +12,9 @@
         <result column="del" property="del" jdbcType="INTEGER"/>
     </resultMap>
 
-    <select id="selectByPassword" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <select id="selectByPassword" resultMap="BaseResultMap" parameterType="java.lang.String">
         select id,email,phone,username,qq,time,update_time,del FROM user
-        WHERE password = #{password,jdbcType=INTEGER}
+        WHERE password = #{password,jdbcType=VARCHAR}
     </select>
 
     <resultMap id="BaseResultMap1" type="com.learn.model.User">
@@ -25,6 +25,7 @@
         <result column="qq" property="qq" jdbcType="VARCHAR"/>
         <result column="time" property="time" jdbcType="INTEGER"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="newpassword" property="newpassword" jdbcType="VARCHAR"/>
         <result column="update_time" property="updateTime" jdbcType="INTEGER"/>
         <result column="del" property="del" jdbcType="INTEGER"/>
     </resultMap>
@@ -32,4 +33,15 @@
     <select id="selectById" resultMap="BaseResultMap1" parameterType="java.lang.Integer">
         select * from user where id = #{id,jdbcType=INTEGER}
     </select>
+
+    <update id="update" parameterType="com.learn.model.User">
+        update user
+        <set>
+            <if test="newpassword != null">
+                newpassword = #{newpassword,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where id=#{id,jdbcType=INTEGER}
+    </update>
+
 </mapper>

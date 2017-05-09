@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserDao {
 
-    User selectByPassword(int password);
+    User selectByPassword(String password);
     User selectById(int id);
+    void update(User u);
 }

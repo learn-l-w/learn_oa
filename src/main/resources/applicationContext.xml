@@ -113,6 +113,11 @@
         <property name="mapperInterface" value="com.learn.dao.DemoDao"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
+
+    <bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.learn.dao.UserDao"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
     <!--mybatis end-->
 
 </beans>
