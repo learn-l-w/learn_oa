@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+   <mapper namespace="com.learn.dao.RoleDao">
+        <!--映射-->
+        <resultMap id="BaseResultMap" type="com.learn.model.Role">
+            <id column="id" property="id" jdbcType="INTEGER"/>
+            <result column="title" property="title" jdbcType="VARCHAR"/>
+            <result column="del" property="del" jdbcType="INTEGER"/>
+            <result column="remark" property="remark" jdbcType="VARCHAR"/>
+            <result column="time" property="time" jdbcType="INTEGER"/>
+            <result column="update_time" property="updateTime" jdbcType="INTEGER"/>
+        </resultMap>
+
+        <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+          select
+          id,title,del,remark,time,update_time
+          from role
+          where id = #{id,jdbcType=INTEGER}
+        </select>
+
+        <insert id="insert" parameterType="com.learn.model.Role" useGeneratedKeys="true" keyProperty="id">
+            insert into role
+            (
+            <if test="title != null">
+                title,
+            </if>
+            <if test="desc != null">
+                `desc`,
+            </if>
+            update_time,
+            time)
+            values (
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="desc != null">
+                #{desc,jdbcType=VARCHAR},
+            </if>
+            unix_timestamp(),
+            unix_timestamp())
+        </insert>
+
+        <update id="update" parameterType="com.learn.model.Role">
+            update role
+            <set>
+                <if test="title != null">
+                    title = #{title,jdbcType=VARCHAR},
+                </if>
+                <if test="desc != null">
+                    `desc` = #{desc,jdbcType=VARCHAR},
+                </if>
+                <if test="updateTime != null">
+                    update_time = unix_timestamp(),
+                </if>
+            </set>
+            where id = #{id,jdbcType=INTEGER}
+        </update>
+
+        <update id="delete" parameterType="java.lang.Integer">
+            update role
+            set del = 1
+            where id = #{id,jdbcType=INTEGER}
+        </update>
+
+   </mapper>
