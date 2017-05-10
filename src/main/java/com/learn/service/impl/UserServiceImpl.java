@@ -1,17 +1,14 @@
 package com.learn.service.impl;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.learn.dao.UserDao;
 import com.learn.exception.LearnException;
 import com.learn.model.User;
 import com.learn.model.base.PageList;
 import com.learn.service.UserService;
+import com.learn.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.security.util.Password;
 
-import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,14 +24,13 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User look(String password) {
-        User s = uDao.selectByPassword(password);
-
-        if (s.getDel()>0){
-            throw new LearnException("用户不存在");
-        }
+       String passwor = MD5Utils.getMD5String(password);
+        User s = uDao.selectByPassword(passwor);
 
         if (s==null){
             throw new LearnException("账号或密码错误");
+        }else if(s.getDel()>0){
+            throw new LearnException("用户不存在");
         }
 
       return s;
@@ -51,10 +47,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void detail(Integer id,String password,String newpassword) {
-        if(uDao.selectByPassword(password)==null){
+        String passwor = MD5Utils.getMD5String(password);
+        if(uDao.selectByPassword(passwor)==null){
             throw new LearnException("账号或密码错误");
         }else{
-            uDao.update(id,newpassword);
+            uDao.update(id,MD5Utils.getMD5String(newpassword));
         }
     }
 
@@ -79,7 +76,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void insertUser(User user) {
-        System.out.println(user.toString()+"=============================================");
+        user.setPassword(MD5Utils.getMD5String(user.getPassword()));
         uDao.insertUser(user);
     }
 }

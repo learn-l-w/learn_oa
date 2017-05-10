@@ -14,8 +14,9 @@
 
     <select id="selectByPassword" resultMap="BaseResultMap" parameterType="java.lang.String">
         select id,email,phone,username,qq,time,update_time,del FROM user
-        WHERE password = #{password,jdbcType=VARCHAR}
+        WHERE password = #{passwor,jdbcType=VARCHAR}
     </select>
+
 
     <resultMap id="BaseResultMap1" type="com.learn.model.User">
         <id column="id" property="id" jdbcType="INTEGER"/>
@@ -39,9 +40,9 @@
             <if test="newpassword != null">
                 password = #{newpassword,jdbcType=VARCHAR},
             </if>
-            <if test="updateTime != null">
+
                 update_time = unix_timestamp()
-            </if>
+
         </set>
         where id=#{id,jdbcType=INTEGER}
     </update>

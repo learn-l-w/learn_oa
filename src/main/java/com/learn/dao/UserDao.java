@@ -1,10 +1,8 @@
 package com.learn.dao;
 
 import com.learn.model.User;
-import com.learn.model.base.PageList;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
 /**
@@ -16,7 +14,7 @@ import java.util.List;
 @Mapper
 public interface UserDao {
 
-    User selectByPassword(String password);
+    User selectByPassword(String passwor);
     User selectById(int id);
     void update(@Param("id") Integer id,@Param("newpassword") String newpassword);
     void deleteId(Integer id);
