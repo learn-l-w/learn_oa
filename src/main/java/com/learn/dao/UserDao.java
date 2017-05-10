@@ -1,8 +1,11 @@
 package com.learn.dao;
 
 import com.learn.model.User;
+import com.learn.model.base.PageList;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,4 +20,6 @@ public interface UserDao {
     User selectById(int id);
     void update(@Param("id") Integer id,@Param("newpassword") String newpassword);
     void deleteId(Integer id);
+    List<User> selectUser(@Param("offset") int offset,@Param("length") int length);
+    void insertUser(User user);
 }

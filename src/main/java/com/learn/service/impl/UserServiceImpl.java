@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.learn.dao.UserDao;
 import com.learn.exception.LearnException;
 import com.learn.model.User;
+import com.learn.model.base.PageList;
 import com.learn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,5 +67,19 @@ public class UserServiceImpl implements UserService{
         }else{
             uDao.deleteId(id);
         }
+    }
+
+    @Override
+    public PageList<User> getPage(int offset,int length) {
+        PageList<User> pageList = new PageList<User>();
+        pageList.setList( uDao.selectUser(offset,length));
+        //pageList.setTotal(uDao.getTotal);
+        return pageList;
+    }
+
+    @Override
+    public void insertUser(User user) {
+        System.out.println(user.toString()+"=============================================");
+        uDao.insertUser(user);
     }
 }

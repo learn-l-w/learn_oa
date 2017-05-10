@@ -2,6 +2,7 @@ package com.learn.service;
 
 
 import com.learn.model.User;
+import com.learn.model.base.PageList;
 
 
 /**
@@ -15,4 +16,6 @@ public interface UserService {
     User lookById(int id);
     void detail(Integer id,String password,String newpassword);
     void drop(Integer id);
+    PageList<User> getPage(int offset,int length);
+    void insertUser(User user);
 }
