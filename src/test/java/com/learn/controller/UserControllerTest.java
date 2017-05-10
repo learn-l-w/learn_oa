@@ -14,11 +14,20 @@ public class UserControllerTest extends BaseTest {
 
     @Test
     public void detailTest(){
+        //dao层@param的用法
         Map<String, Object> params = new HashMap<>();
         params.put("id", 1);
         params.put("password", 123);
         params.put("newpassword", 23);
         JsonNode res = httpPost("/user/detail", params);
+        printObj(res);
+    }
+
+    @Test
+    public void dropTest(){
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", 1);
+        JsonNode res = httpPost("/user/drop", params);
         printObj(res);
     }
 }

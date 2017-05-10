@@ -25,7 +25,6 @@
         <result column="qq" property="qq" jdbcType="VARCHAR"/>
         <result column="time" property="time" jdbcType="INTEGER"/>
         <result column="password" property="password" jdbcType="VARCHAR"/>
-        <result column="newpassword" property="newpassword" jdbcType="VARCHAR"/>
         <result column="update_time" property="updateTime" jdbcType="INTEGER"/>
         <result column="del" property="del" jdbcType="INTEGER"/>
     </resultMap>
@@ -34,14 +33,24 @@
         select * from user where id = #{id,jdbcType=INTEGER}
     </select>
 
-    <update id="update" parameterType="com.learn.model.User">
+    <update id="update" parameterType="java.util.Map">
         update user
         <set>
             <if test="newpassword != null">
-                newpassword = #{newpassword,jdbcType=VARCHAR}
+                password = #{newpassword,jdbcType=VARCHAR}
             </if>
         </set>
         where id=#{id,jdbcType=INTEGER}
+    </update>
+
+    <!--todo learn_1.5 项目中的删除一律用软删除，就是用del标记位 -->
+    <update id="deleteId" parameterType="java.lang.Integer">
+        update user
+        <set>
+            del = 2
+
+        </set>
+        where id = #{id,jdbcType=INTEGER}
     </update>
 
 </mapper>

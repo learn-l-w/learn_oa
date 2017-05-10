@@ -1,11 +1,16 @@
 package com.learn.service.impl;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.learn.dao.UserDao;
 import com.learn.exception.LearnException;
 import com.learn.model.User;
 import com.learn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.security.util.Password;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,9 +27,15 @@ public class UserServiceImpl implements UserService{
     @Override
     public User look(String password) {
         User s = uDao.selectByPassword(password);
+
+        if (s.getDel()>0){
+            throw new LearnException("用户不存在");
+        }
+
         if (s==null){
             throw new LearnException("账号或密码错误");
         }
+
       return s;
     }
 
@@ -38,12 +49,22 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void detail(User u) {
-        User us = uDao.selectByPassword(u.getPassword());
-        if(us==null){
+    public void detail(Integer id,String password,String newpassword) {
+        if(uDao.selectByPassword(password)==null){
             throw new LearnException("账号或密码错误");
         }else{
-            uDao.update(u);
+            uDao.update(id,newpassword);
+        }
+    }
+
+
+    @Override
+    public void drop(Integer id) {
+
+        if(uDao.selectById(id) == null){
+            throw new LearnException("此账号不存在");
+        }else{
+            uDao.deleteId(id);
         }
     }
 }

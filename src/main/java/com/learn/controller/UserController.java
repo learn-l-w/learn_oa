@@ -12,6 +12,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -45,17 +47,35 @@ public class UserController extends BaseController{
 
     @POST
     @Path("/detail")
-    public Map<String,Object> detail(JsonNode jsonnode){
-        User u = getDemoByJson(jsonnode);
-        uService.detail(u);
+  /*  public Map<String,Object> detail(JsonNode jsonnode){
+        User user = getUserByJson(jsonnode);
+        uService.detail(user);
+        return returnMap(KEY_RESULT, "1");
+    }*/
+      public Map<String,Object> detail(JsonNode jsonnode){
+
+        Integer id = getJsonInt(jsonnode, "id", false);
+        String password = getJsonText(jsonnode, "password", false);
+        String newpassword = getJsonText(jsonnode, "newpassword", false);
+
+        uService.detail(id, password, newpassword);
+
         return returnMap(KEY_RESULT, "1");
     }
 
-    private User getDemoByJson(JsonNode jsonnode) {
+    @POST
+    @Path("/drop")
+    public Map<String,Object> drop(JsonNode jsonnode){
+        Integer id = getJsonInt(jsonnode, "id", false);
+        uService.drop(id);
+        return returnMap(KEY_RESULT, "1");
+    }
+
+   /* private User getUserByJson(JsonNode jsonnode) {
         User user = new User();
         user.setId(getJsonInt(jsonnode, "id", false));
-        user.setPassword(getJsonText(jsonnode,"password",false));
-        user.setNewpassword(getJsonText(jsonnode,"newpassword",false));
+        user.setPassword(getJsonText(jsonnode, "password", false));
+        user.setDel(getJsonInt(jsonnode,"del",false));
         return user;
-    }
+    }*/
 }
