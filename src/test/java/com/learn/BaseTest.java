@@ -32,7 +32,7 @@ public abstract class BaseTest {
         System.out.println("Test!");
     }
 
-    private static final String HOST = "http://localhost:8089";
+    private static final String HOST = "http://localhost:8088";
 
     private Client client;
 

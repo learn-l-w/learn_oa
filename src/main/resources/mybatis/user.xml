@@ -12,9 +12,9 @@
         <result column="del" property="del" jdbcType="INTEGER"/>
     </resultMap>
 
-    <select id="selectByPassword" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <select id="selectByPassword" resultMap="BaseResultMap" parameterType="java.lang.String">
         select id,email,phone,username,qq,time,update_time,del FROM user
-        WHERE password = #{password,jdbcType=INTEGER}
+        WHERE password = #{password,jdbcType=VARCHAR}
     </select>
 
     <resultMap id="BaseResultMap1" type="com.learn.model.User">
@@ -32,4 +32,25 @@
     <select id="selectById" resultMap="BaseResultMap1" parameterType="java.lang.Integer">
         select * from user where id = #{id,jdbcType=INTEGER}
     </select>
+
+    <update id="update" parameterType="java.util.Map">
+        update user
+        <set>
+            <if test="newpassword != null">
+                password = #{newpassword,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where id=#{id,jdbcType=INTEGER}
+    </update>
+
+    <!--todo learn_1.5 项目中的删除一律用软删除，就是用del标记位 -->
+    <update id="deleteId" parameterType="java.lang.Integer">
+        update user
+        <set>
+            del = 2
+
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
 </mapper>

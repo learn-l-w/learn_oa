@@ -27,8 +27,8 @@ public class RoleController extends BaseController{
     private RoleService roleService;
 
     @GET
-    @Path("/detail")
-    public Role detail (@QueryParam("id") int id){
+    @Path("/select")
+    public Role select (@QueryParam("id") int id){
         return roleService.selectById(id);
     }
 
@@ -50,13 +50,18 @@ public class RoleController extends BaseController{
 
     @POST
     @Path("/delete")
-    public Role delete (@QueryParam("id") int id){
-        return roleService.selectById(id);
+    public Map<String,Object> delete (JsonNode jsonNode){
+        Integer id = getJsonInt(jsonNode, "id", false);
+        roleService.delete(id);
+        return returnMap(KEY_RESULT, "1");
     }
 
     private Role getRoleByJson(JsonNode jsonNode){
         Role role = new Role();
         role.setId(getJsonInt(jsonNode, "id", false));
+        role.setRemark(getJsonText(jsonNode, "remark", false));
+        role.setTime(getJsonInt(jsonNode, "time", false));
+        role.setUpdateTime(getJsonInt(jsonNode, "updateTime", false));
         role.setTitle(getJsonText(jsonNode, "title", false));
         return role;
     }

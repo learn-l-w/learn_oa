@@ -3,6 +3,7 @@ package com.learn.service;
 
 import com.learn.model.User;
 
+
 /**
  * Created with IntelliJ IDEA.
  * User: wangqingyu
@@ -10,6 +11,8 @@ import com.learn.model.User;
  * Time: 上午14:18
  */
 public interface UserService {
-    User look(int password);
+    User look(String password);
     User lookById(int id);
+    void detail(Integer id,String password,String newpassword);
+    void drop(Integer id);
 }

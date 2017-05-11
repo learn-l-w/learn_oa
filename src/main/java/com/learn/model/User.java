@@ -60,5 +60,4 @@ public class User extends BaseModel {
     public void setQq(String qq) {
         this.qq = qq;
     }
-
 }

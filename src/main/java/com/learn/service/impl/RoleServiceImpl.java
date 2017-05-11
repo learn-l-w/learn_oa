@@ -1,6 +1,7 @@
 package com.learn.service.impl;
 
 import com.learn.dao.RoleDao;
+import com.learn.exception.LearnException;
 import com.learn.model.Role;
 import com.learn.service.RoleService;
 
@@ -37,6 +38,11 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void delete(int id) {
-        roleDao.delete(id);
+        if( roleDao.selectById(id) == null){
+            throw new LearnException("用户不存在");
+        }else{
+            roleDao.delete(id);
+        }
+
     }
 }
