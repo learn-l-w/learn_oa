@@ -45,7 +45,7 @@ public class RoleControllerTest extends BaseTest {
     @Test
     public void testDelete(){
         Map<String, Object> params = new HashMap<>();
-        params.put("id",12);
+        params.put("id",10);
         JsonNode res = httpPost("/role/delete", params);
         printObj(res);
     }
