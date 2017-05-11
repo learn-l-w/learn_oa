@@ -32,6 +32,7 @@ public class RoleController extends BaseController{
         return roleService.selectById(id);
     }
 
+
     @POST
     @Path("/insert")
     public Map<String,Object> insert(JsonNode jsonNode){

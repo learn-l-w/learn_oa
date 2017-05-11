@@ -35,7 +35,7 @@ public class RoleControllerTest extends BaseTest {
     @Test
     public void testUpdate(){
         Map<String, Object> params = new HashMap<>();
-        params.put("id",4);
+        params.put("id",7);
         params.put("title","wangba");
         params.put("remark","paodekuai");
         JsonNode res = httpPost("/role/update", params);

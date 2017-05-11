@@ -13,5 +13,6 @@ public interface RoleService {
     Role selectById(int id);
     void insert(Role role);
     void update(Role role);
+
     void delete(int id);
 }

@@ -39,7 +39,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void delete(int id) {
         if( roleDao.selectById(id) == null){
-            throw new LearnException("用户不存在");
+            throw new LearnException("用户不存在de");
         }else{
             roleDao.delete(id);
         }
