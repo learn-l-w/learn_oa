@@ -4,7 +4,6 @@ import com.learn.model.Role;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import javax.ws.rs.QueryParam;
 import java.util.List;
 
 /**
