@@ -18,6 +18,8 @@
           where id = #{id,jdbcType=INTEGER}
         </select>
 
+
+
         <insert id="insert" parameterType="com.learn.model.Role" useGeneratedKeys="true" keyProperty="id">
             insert into role
             (
@@ -60,5 +62,22 @@
             set del = 1
             where id = #{id,jdbcType=INTEGER}
         </update>
+
+
+    <resultMap id="BaseResultMap1" type="com.learn.model.Role">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="del" property="del" jdbcType="INTEGER"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="time" property="time" jdbcType="INTEGER"/>
+        <result column="update_time" property="updateTime" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="queryPage" resultMap="BaseResultMap1" parameterType="java.util.List">
+        select
+        *
+        from role where del = 0 limit #{offset,jdbcType=INTEGER},#{length,jdbcType=INTEGER}
+
+    </select>
 
    </mapper>

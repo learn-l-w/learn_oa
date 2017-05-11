@@ -3,6 +3,7 @@ package com.learn.service.impl;
 import com.learn.dao.RoleDao;
 import com.learn.exception.LearnException;
 import com.learn.model.Role;
+import com.learn.model.base.PageList;
 import com.learn.service.RoleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +38,16 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public PageList<Role> getPage(int offset, int length){
+        PageList<Role> pageList = new PageList<>();
+        pageList.setList(roleDao.queryPage(offset, length));
+        return pageList;
+    }
+
+    @Override
     public void delete(int id) {
         if( roleDao.selectById(id) == null){
-            throw new LearnException("用户不存在de");
+            throw new LearnException("用户不存在");
         }else{
             roleDao.delete(id);
         }

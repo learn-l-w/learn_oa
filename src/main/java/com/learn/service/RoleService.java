@@ -1,6 +1,7 @@
 package com.learn.service;
 
 import com.learn.model.Role;
+import com.learn.model.base.PageList;
 
 /**
  * Created with InterlliJ IDEA.
@@ -13,6 +14,6 @@ public interface RoleService {
     Role selectById(int id);
     void insert(Role role);
     void update(Role role);
-
     void delete(int id);
+    PageList<Role> getPage(int offset, int length);
 }

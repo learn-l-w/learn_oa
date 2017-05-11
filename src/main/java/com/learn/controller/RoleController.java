@@ -2,6 +2,7 @@ package com.learn.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.learn.model.Role;
+import com.learn.model.base.PageList;
 import com.learn.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,11 @@ public class RoleController extends BaseController{
         return roleService.selectById(id);
     }
 
+    @GET
+    @Path("/queryPage")
+    public PageList<Role> queryPage(@QueryParam("offset") int offset,@QueryParam("length") int length ){
+        return roleService.getPage(offset,length);
+    }
 
     @POST
     @Path("/insert")
