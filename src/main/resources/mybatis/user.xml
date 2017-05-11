@@ -14,8 +14,9 @@
 
     <select id="selectByPassword" resultMap="BaseResultMap" parameterType="java.lang.String">
         select id,email,phone,username,qq,time,update_time,del FROM user
-        WHERE password = #{password,jdbcType=VARCHAR}
+        WHERE password = #{passwor,jdbcType=VARCHAR}
     </select>
+
 
     <resultMap id="BaseResultMap1" type="com.learn.model.User">
         <id column="id" property="id" jdbcType="INTEGER"/>
@@ -37,8 +38,11 @@
         update user
         <set>
             <if test="newpassword != null">
-                password = #{newpassword,jdbcType=VARCHAR}
+                password = #{newpassword,jdbcType=VARCHAR},
             </if>
+
+                update_time = unix_timestamp()
+
         </set>
         where id=#{id,jdbcType=INTEGER}
     </update>
@@ -53,4 +57,59 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
+    <resultMap id="BaseResultMap2" type="com.learn.model.User">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="qq" property="qq" jdbcType="VARCHAR"/>
+        <result column="time" property="time" jdbcType="INTEGER"/>
+        <result column="update_time" property="updateTime" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="selectUser" resultMap="BaseResultMap2" parameterType="java.util.List">
+        select  id,email,phone,username,qq,time,update_time from user where del = 0 limit #{offset,jdbcType=INTEGER},#{length,jdbcType=INTEGER}
+
+    </select>
+    
+    <insert id="insertUser" parameterType="com.learn.model.User" keyProperty="id" useGeneratedKeys="true">
+        insert into user
+        (
+        <if test="email != null">
+            email,
+        </if>
+        <if test="phone != null">
+            phone,
+        </if>
+        <if test="username != null">
+            username,
+        </if>
+        <if test="qq != null">
+            qq,
+        </if>
+        <if test="password != null">
+            password,
+        </if>
+            time
+        )
+        values
+        (
+        <if test="email != null">
+            #{email,jdbcType=VARCHAR},
+        </if>
+        <if test="phone != null">
+            #{phone,jdbcType=VARCHAR},
+        </if>
+        <if test="username != null">
+            #{username,jdbcType=VARCHAR},
+        </if>
+        <if test="qq != null">
+            #{qq,jdbcType=VARCHAR},
+        </if>
+        <if test="password != null">
+            #{password,jdbcType=VARCHAR},
+        </if>
+        unix_timestamp()
+        )
+    </insert>
 </mapper>

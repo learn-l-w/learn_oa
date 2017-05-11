@@ -1,9 +1,8 @@
 package com.learn.controller;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.learn.model.Demo;
 import com.learn.model.User;
+import com.learn.model.base.PageList;
 import com.learn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +11,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -46,7 +43,7 @@ public class UserController extends BaseController{
     }
 
     @POST
-    @Path("/detail")
+    @Path("/update")
   /*  public Map<String,Object> detail(JsonNode jsonnode){
         User user = getUserByJson(jsonnode);
         uService.detail(user);
@@ -71,6 +68,12 @@ public class UserController extends BaseController{
         return returnMap(KEY_RESULT, "1");
     }
 
+    @GET
+    @Path("/selectUser")
+    public PageList<User> selectUser(@QueryParam("offset") int offset,@QueryParam("length") int length){
+        return uService.getPage(offset,length);
+    }
+
    /* private User getUserByJson(JsonNode jsonnode) {
         User user = new User();
         user.setId(getJsonInt(jsonnode, "id", false));
@@ -78,4 +81,25 @@ public class UserController extends BaseController{
         user.setDel(getJsonInt(jsonnode,"del",false));
         return user;
     }*/
+
+    @POST
+    @Path("/insertUser")
+    public Map<String, Object> insertUser(JsonNode jsonnode){
+        User user = getUserByJson(jsonnode);
+        uService.insertUser(user);
+        return returnMap(KEY_RESULT, "1");
+    }
+
+    private User getUserByJson(JsonNode jsonnode){
+        User user = new User();
+        user.setId(getJsonInt(jsonnode, "id",false));
+        user.setEmail(getJsonText(jsonnode, "email",false));
+        user.setPhone(getJsonText(jsonnode, "phone",false));
+        user.setQq(getJsonText(jsonnode, "qq",false));
+        user.setUsername(getJsonText(jsonnode, "username",false));
+        user.setPassword(getJsonText(jsonnode, "password",false));
+        user.setTime(getJsonInt(jsonnode, "time",false));
+        user.setUpdateTime(getJsonInt(jsonnode,"updateTime",false));
+        return user;
+    }
 }

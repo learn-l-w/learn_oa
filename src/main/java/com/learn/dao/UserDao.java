@@ -3,6 +3,7 @@ package com.learn.dao;
 import com.learn.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,8 +14,10 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface UserDao {
 
-    User selectByPassword(String password);
+    User selectByPassword(String passwor);
     User selectById(int id);
     void update(@Param("id") Integer id,@Param("newpassword") String newpassword);
     void deleteId(Integer id);
+    List<User> selectUser(@Param("offset") int offset,@Param("length") int length);
+    void insertUser(User user);
 }
