@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.learn.dao.RoleUserDao">
+
+    <resultMap id="BaseResult" type="com.learn.model.RoleUser">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="role_id" property="roleId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="getSelectUserIdAndRoleId" resultMap="BaseResult" parameterType="java.util.Map">
+        select id,user_id, role_id from user_role where user_id = #{userId,jdbcType=INTEGER} and role_id = #{roleId,jdbcType=INTEGER} and del=0
+    </select>
+
+    <insert id="insertRoleIdAndUserId" parameterType="com.learn.model.RoleUser" keyProperty="id" useGeneratedKeys="true">
+        insert into user_role
+        (
+        <if test="roleId != null">
+            role_id,
+        </if>
+        <if test=" userId != null">
+            user_id,
+        </if>
+        time
+        )
+        values(
+        <if test="roleId != null">
+            #{roleId,jdbcType=INTEGER},
+        </if>
+        <if test=" userId != null">
+            #{userId,jdbcType=INTEGER},
+        </if>
+        unix_timestamp()
+        )
+    </insert>
+
+    <resultMap id="BaseResult1" type="com.learn.model.Role">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="time" property="time" jdbcType="INTEGER"/>
+        <result column="update_time" property="updateTime" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="getRoleByUserId" resultMap="BaseResult1" parameterType="java.lang.Integer">
+        select role.id,role.title,role.remark,role.time,role.update_time from role join user_role on user_role.role_id = role.id where user_id = #{userId} and user_role.del = 0 and role.del=0
+    </select>
+
+    <resultMap id="BaseResult2" type="com.learn.model.User">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="qq" property="qq" jdbcType="VARCHAR"/>
+        <result column="time" property="time" jdbcType="INTEGER"/>
+        <result column="update_time" property="updateTime" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="getUserByRoleId" resultMap="BaseResult2" parameterType="java.lang.Integer">
+        select user.id,user.email,user.phone,user.username, user.qq,user.time,user.update_time from user_role join user on user_role.user_id = user.id where role_id = #{roleId} and user_role.del=0 and user.del=0
+    </select>
+
+    <update id="deleteRoleIdAndUserId" parameterType="java.lang.Integer">
+        update user_role set
+        del = 1,
+        update_time = unix_timestamp()
+        where id=#{id}
+    </update>
+</mapper>
