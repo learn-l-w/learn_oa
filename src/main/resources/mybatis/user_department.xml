@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.learn.dao.UserDepartmentDao">
+    <resultMap id="BaseResultMap1" type="com.learn.model.UserDepartment">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="position_id" property="positionId" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="selectUserDepartment" resultMap="BaseResultMap1" parameterType="java.util.Map">
+        select id,user_id,position_id from user_position where user_id=#{userId,jdbcType=INTEGER} and position_id=#{positionId,jdbcType=INTEGER} and del=0
+    </select>
+
+
+
+    <insert id="insertUserAndDepartment" parameterType="com.learn.model.UserDepartment" keyProperty="id" useGeneratedKeys="true">
+        insert into user_position(
+        <if test="userId != null">
+            user_id,
+        </if>
+        <if test="positionId != null">
+
+            position_id,
+        </if>
+        time
+        )
+        values(
+        <if test="userId != null">
+            #{userId,jdbcType=INTEGER},
+        </if>
+        <if test="positionId != null">
+            #{positionId,jdbcType=INTEGER},
+        </if>
+        unix_timestamp()
+        )
+    </insert>
+</mapper>

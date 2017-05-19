@@ -4,23 +4,28 @@
     <resultMap id="BaseResultMap" type="com.learn.model.User">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="title" property="departName" jdbcType="VARCHAR"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="qq" property="qq" jdbcType="VARCHAR"/>
         <result column="time" property="time" jdbcType="INTEGER"/>
         <result column="update_time" property="updateTime" jdbcType="INTEGER"/>
-        <result column="del" property="del" jdbcType="INTEGER"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="birthday" property="birthday" jdbcType="INTEGER"/>
+        <result column="postal_address" property="postal_address" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="selectByPassword" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select id,email,phone,username,qq,time,update_time,del FROM user
-        WHERE password = #{passwor,jdbcType=VARCHAR} and del = 0
+        select user.id,user.email,position.title,user.phone,user.username,user.qq,user.time,user.update_time,user.sex,user.address,user.birthday,user.postal_address,user.remark FROM user join position on user.dep_id=position.id where user.password = #{passwor,jdbcType=VARCHAR} and user.del = 0 and position.del=0
     </select>
 
 
     <resultMap id="BaseResultMap1" type="com.learn.model.User">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="title" property="departName" jdbcType="VARCHAR"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="qq" property="qq" jdbcType="VARCHAR"/>
@@ -28,10 +33,15 @@
         <result column="password" property="password" jdbcType="VARCHAR"/>
         <result column="update_time" property="updateTime" jdbcType="INTEGER"/>
         <result column="del" property="del" jdbcType="INTEGER"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="birthday" property="birthday" jdbcType="INTEGER"/>
+        <result column="postal_address" property="postal_address" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="selectById" resultMap="BaseResultMap1" parameterType="java.lang.Integer">
-        select * from user where id = #{id,jdbcType=INTEGER}
+        select user.id,user.email,position.title,user.phone,user.username, user.qq,user.time,user.password,user.update_time,user.del,user.sex,user.address, user.birthday, user.postal_address, user.remark from user join position on user.dep_id=position.id where user.id = #{id,jdbcType=INTEGER}
     </select>
 
     <update id="update" parameterType="java.util.Map">
@@ -65,11 +75,21 @@
         <result column="qq" property="qq" jdbcType="VARCHAR"/>
         <result column="time" property="time" jdbcType="INTEGER"/>
         <result column="update_time" property="updateTime" jdbcType="INTEGER"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="dep_id" property="depId" jdbcType="INTEGER"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="birthday" property="birthday" jdbcType="INTEGER"/>
+        <result column="postal_address" property="postal_address" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="selectUser" resultMap="BaseResultMap2" parameterType="java.util.List">
-        select  id,email,phone,username,qq,time,update_time from user where del = 0 limit #{offset,jdbcType=INTEGER},#{length,jdbcType=INTEGER}
+        select  id,email,phone,username,qq,time,update_time,sex,dep_id,address,birthday,postal_address,remark from user where del = 0 limit #{offset,jdbcType=INTEGER},#{length,jdbcType=INTEGER}
 
+    </select>
+
+    <select id="getTotal" resultType="java.lang.Integer">
+        select count(*) from user where del = 0
     </select>
     
     <insert id="insertUser" parameterType="com.learn.model.User" keyProperty="id" useGeneratedKeys="true">
@@ -90,7 +110,17 @@
         <if test="password != null">
             password,
         </if>
-            time
+            time,
+        <if test="sex != null">
+            sex,
+        </if>
+        <if test="depId != null">
+            dep_id,
+        </if>
+        address,
+        birthday,
+        postal_address,
+        remark
         )
         values
         (
@@ -109,7 +139,17 @@
         <if test="password != null">
             #{password,jdbcType=VARCHAR},
         </if>
-        unix_timestamp()
+        unix_timestamp(),
+        <if test="sex != null">
+            #{sex,jdbcType=INTEGER},
+        </if>
+        <if test="depId != null">
+            #{depId,jdbcType=INTEGER},
+        </if>
+        #{address,jdbcType=VARCHAR},
+        #{birthday,jdbcType=INTEGER},
+        #{postal_address,jdbcType=VARCHAR},
+        #{remark,jdbcType=VARCHAR}
         )
     </insert>
 </mapper>

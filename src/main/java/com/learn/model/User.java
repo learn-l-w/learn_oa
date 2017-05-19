@@ -14,9 +14,73 @@ public class User extends BaseModel {
 
     private String username;
     private String email;
+    private String departName;
     private String phone;
     private String qq;
     private String password;
+    private int sex;
+    private int depId;
+    private String address;
+    private int birthday;
+    private String postal_address;
+    private String remark;
+
+
+    public String getDepartName() {
+        return departName;
+    }
+
+    public void setDepartName(String departName) {
+        this.departName = departName;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
+    }
+
+    public int getDepId() {
+        return depId;
+    }
+
+    public void setDepId(int depId) {
+        this.depId = depId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(int birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getPostal_address() {
+        return postal_address;
+    }
+
+    public void setPostal_address(String postal_address) {
+        this.postal_address = postal_address;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public User() {
     }

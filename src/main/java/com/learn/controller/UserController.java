@@ -92,14 +92,19 @@ public class UserController extends BaseController{
 
     private User getUserByJson(JsonNode jsonnode){
         User user = new User();
-        user.setId(getJsonInt(jsonnode, "id",false));
-        user.setEmail(getJsonText(jsonnode, "email",false));
-        user.setPhone(getJsonText(jsonnode, "phone",false));
-        user.setQq(getJsonText(jsonnode, "qq",false));
-        user.setUsername(getJsonText(jsonnode, "username",false));
-        user.setPassword(getJsonText(jsonnode, "password",false));
-        user.setTime(getJsonInt(jsonnode, "time",false));
-        user.setUpdateTime(getJsonInt(jsonnode,"updateTime",false));
+        user.setId(getJsonInt(jsonnode, "id", false));
+        user.setEmail(getJsonText(jsonnode, "email", false));
+        user.setPhone(getJsonText(jsonnode, "phone", false));
+        user.setQq(getJsonText(jsonnode, "qq", false));
+        user.setUsername(getJsonText(jsonnode, "username", false));
+        user.setPassword(getJsonText(jsonnode, "password", false));
+        user.setTime(getJsonInt(jsonnode, "time", false));
+        user.setUpdateTime(getJsonInt(jsonnode, "updateTime", false));
+        user.setAddress(getJsonText(jsonnode, "address", false));
+        user.setBirthday(getJsonInt(jsonnode, "birthday", false));
+        user.setDepId(getJsonInt(jsonnode, "depId", false));
+        user.setPostal_address(getJsonText(jsonnode, "postal_address",false));
+        user.setRemark(getJsonText(jsonnode,"remark",false));
         return user;
     }
 }

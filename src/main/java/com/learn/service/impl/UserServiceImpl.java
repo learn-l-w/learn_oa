@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserDao uDao;
 
+
     @Override
     public User look(String password) {
        String passwor = MD5Utils.getMD5String(password);
@@ -51,7 +52,7 @@ public class UserServiceImpl implements UserService{
         if(uDao.selectByPassword(passwor)==null){
             throw new LearnException("账号或密码错误");
         }else{
-            uDao.update(id,MD5Utils.getMD5String(newpassword));
+            uDao.update(id, MD5Utils.getMD5String(newpassword));
         }
     }
 
@@ -70,7 +71,7 @@ public class UserServiceImpl implements UserService{
     public PageList<User> getPage(int offset,int length) {
         PageList<User> pageList = new PageList<User>();
         pageList.setList( uDao.selectUser(offset,length));
-        //pageList.setTotal(uDao.getTotal);
+        pageList.setTotal(uDao.getTotal());
         return pageList;
     }
 

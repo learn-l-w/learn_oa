@@ -19,5 +19,6 @@ public interface UserDao {
     void update(@Param("id") Integer id,@Param("newpassword") String newpassword);
     void deleteId(Integer id);
     List<User> selectUser(@Param("offset") int offset,@Param("length") int length);
+    int getTotal();
     void insertUser(User user);
 }
