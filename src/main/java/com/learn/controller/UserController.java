@@ -110,6 +110,7 @@ public class UserController extends BaseController{
         user.setAddress(getJsonText(jsonnode, "address", false));
         user.setBirthday(getJsonInt(jsonnode, "birthday", false));
         user.setDepId(getJsonInt(jsonnode, "depId", false));
+        user.setJob(getJsonText(jsonnode,"job",false));
         user.setPostal_address(getJsonText(jsonnode, "postal_address",false));
         user.setRemark(getJsonText(jsonnode,"remark",false));
         return user;
