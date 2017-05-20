@@ -44,6 +44,21 @@
         select user.id,user.email,position.title,user.phone,user.username, user.qq,user.time,user.password,user.update_time,user.del,user.sex,user.address, user.birthday, user.postal_address, user.remark from user join position on user.dep_id=position.id where user.id = #{id,jdbcType=INTEGER}
     </select>
 
+
+    <resultMap id="BaseResultMap3" type="com.learn.model.User">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="title" property="departName" jdbcType="VARCHAR"/>
+        <result column="job" property="job" jdbcType="VARCHAR"/>
+        <result column="leaderJob" property="leaderJob" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectAllUser" resultMap="BaseResultMap3">
+        select us.id,us.username,p.title,us.job,u.job leaderJob,us.phone FROM (user u join user us on u.pers_id=us.mgr_id) left join position p on u.dep_id=p.id
+    </select>
+
+
     <update id="update" parameterType="java.util.Map">
         update user
         <set>
@@ -117,6 +132,13 @@
         <if test="depId != null">
             dep_id,
         </if>
+        <if test="persId != null">
+            pers_id,
+        </if>
+        <if test="mgrId != null">
+            mgr_id,
+        </if>
+        job,
         address,
         birthday,
         postal_address,
@@ -146,6 +168,9 @@
         <if test="depId != null">
             #{depId,jdbcType=INTEGER},
         </if>
+        #{persId,jdbcType=INTEGER},
+        #{mgrId,jdbcType=INTEGER},
+        #{job,jdbcType=VARCHAR},
         #{address,jdbcType=VARCHAR},
         #{birthday,jdbcType=INTEGER},
         #{postal_address,jdbcType=VARCHAR},

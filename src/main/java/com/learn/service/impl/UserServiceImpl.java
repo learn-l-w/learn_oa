@@ -9,6 +9,8 @@ import com.learn.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -54,6 +56,10 @@ public class UserServiceImpl implements UserService{
         }else{
             uDao.update(id, MD5Utils.getMD5String(newpassword));
         }
+    }
+
+    public List<User> selectAllUser(){
+        return uDao.selectAllUser();
     }
 
 

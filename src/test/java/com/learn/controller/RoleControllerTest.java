@@ -19,7 +19,7 @@ public class RoleControllerTest extends BaseTest {
     public void testInsert(){
         Map<String, Object> params = new HashMap<>();
         params.put("title","总经理");
-        params.put("remark","sdsd");
+        params.put("remark","王庆宇");
         JsonNode res = httpPost("/role/insert", params);
         printObj(res);
     }
@@ -35,9 +35,9 @@ public class RoleControllerTest extends BaseTest {
     @Test
     public void testUpdate(){
         Map<String, Object> params = new HashMap<>();
-        params.put("id",7);
-        params.put("title","wangba");
-        params.put("remark","paodekuai");
+        params.put("id",12);
+        params.put("title","王庆宇" );
+        params.put("remark","王庆宇");
         JsonNode res = httpPost("/role/update", params);
         printObj(res);
     }

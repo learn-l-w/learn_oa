@@ -11,6 +11,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,6 +41,12 @@ public class UserController extends BaseController{
     @Path("/look")
     public User lookById(@QueryParam("id") int id){
         return uService.lookById(id);
+    }
+
+    @GET
+    @Path("/selectAllUser")
+    public List<User> selectAllUser(){
+        return uService.selectAllUser();
     }
 
     @POST

@@ -31,4 +31,22 @@
     <select id="selectDepartmentByName" resultMap="BaseMap" parameterType="java.lang.String">
           select id,title,remark,time,update_time,del from position where title = #{name,jdbcType=VARCHAR}
     </select>
+
+    <update id="updateDepartment" parameterType="java.util.Map">
+        update position
+        <set>
+            title=#{title,jdbcType=VARCHAR},
+            remark=#{remark,jdbcType=VARCHAR},
+            update_time=unix_timestamp()
+        </set>
+        where id=#{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="deleteDepartment" parameterType="java.lang.Integer">
+        update position
+        <set>
+            del = 2
+        </set>
+        where id=#{id,jdbcType=INTEGER}
+    </update>
 </mapper>

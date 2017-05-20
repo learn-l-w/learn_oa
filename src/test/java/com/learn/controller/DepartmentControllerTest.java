@@ -20,4 +20,22 @@ public class DepartmentControllerTest extends BaseTest {
         JsonNode res = httpPost("/departm/insert",params);
         printObj(res);
     }
+
+    @Test
+    public void updateDepartmentTest(){
+        Map<String,Object> params = new HashMap<>();
+        params.put("id",8);
+        params.put("title","yuwubu2");
+        params.put("remark","ci bumen yi xiugai");
+        JsonNode res = httpPost("/departm/update",params);
+        printObj(res);
+    }
+
+    @Test
+    public void deleteDepartment(){
+        Map<String,Object> params = new HashMap<>();
+        params.put("id",6);
+        JsonNode res = httpPost("/departm/delete",params);
+        printObj(res);
+    }
 }

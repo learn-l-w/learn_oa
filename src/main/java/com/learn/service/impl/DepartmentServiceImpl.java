@@ -26,4 +26,14 @@ public class DepartmentServiceImpl implements DepartmentService {
         return dmDao.selectDepartmentByName(name);
 
     }
+
+    @Override
+    public void updateDepartment(Integer id,String title,String remark) {
+        dmDao.updateDepartment(id,title,remark);
+    }
+
+    @Override
+    public void deleteDepartment(Integer id) {
+        dmDao.deleteDepartment(id);
+    }
 }

@@ -24,7 +24,45 @@ public class User extends BaseModel {
     private int birthday;
     private String postal_address;
     private String remark;
+    private int persId;
+    private int mgrId;
+    private String job;
+    private String leaderJob;
 
+
+
+    public int getPersId() {
+        return persId;
+    }
+
+    public void setPersId(int persId) {
+        this.persId = persId;
+    }
+
+    public int getMgrId() {
+        return mgrId;
+    }
+
+    public void setMgrId(int mgrId) {
+        this.mgrId = mgrId;
+    }
+
+
+    public String getLeaderJob() {
+        return leaderJob;
+    }
+
+    public void setLeaderJob(String leaderJob) {
+        this.leaderJob = leaderJob;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
 
     public String getDepartName() {
         return departName;

@@ -36,6 +36,24 @@ public class DepartmentController extends BaseController{
        return dmService.selectDepartmentByName(name);
     }
 
+    @POST
+    @Path("/update")
+    public Map<String,Object> updateDepartment(JsonNode jsonNode){
+        Integer id = getJsonInt(jsonNode,"id",false);
+        String title = getJsonText(jsonNode, "title", false);
+        String remark = getJsonText(jsonNode,"remark",false);
+        dmService.updateDepartment(id,title,remark);
+        return returnMap(KEY_RESULT, "1");
+    }
+
+    @POST
+    @Path("/delete")
+    public Map<String,Object> deleteDepartment(JsonNode jsonNode){
+        Integer id = getJsonInt(jsonNode,"id",false);
+        dmService.deleteDepartment(id);
+        return returnMap(KEY_RESULT, "1");
+    }
+
     private Department getDepartment(JsonNode jsonNode){
         Department department = new Department();
         department.setTitle(getJsonText(jsonNode, "title", false));

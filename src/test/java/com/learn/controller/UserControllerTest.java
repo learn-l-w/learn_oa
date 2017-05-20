@@ -34,12 +34,21 @@ public class UserControllerTest extends BaseTest {
     @Test
     public void insertTest(){
         Map<String, Object> params = new HashMap<>();
-        params.put("id",8);
+        params.put("id",13);
         params.put("email","353004524@qq.com");
         params.put("phone","130145966901");
-        params.put("username","Godawp");
+        params.put("username","ff");
         params.put("password","7218729");
         params.put("qq","353004524");
+        params.put("sex",0);
+        params.put("depId",1);
+        params.put("address","henansq");
+        params.put("birthday",19920728);
+        params.put("postal_address","zhongguobeijing");
+        params.put("remark","I am a superMan");
+        params.put("persId",2);
+        params.put("mgrId",2);
+        params.put("job","技工");
         JsonNode res = httpPost("/user/insertUser", params);
         printObj(res);
     }
