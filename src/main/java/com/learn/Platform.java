@@ -16,19 +16,5 @@ public class Platform extends ResourceConfig {
         register(JacksonFeature.class);
         register(MonitoringEventListener.class);
         register(MultiPartFeature.class);
-
-//        // register filters
-//        register(RequestFilter.class);
-//        register(ResponseFilter.class);
-//
-//        // register exception mappers
-//        register(ExceptionMapper.class);
-//
-//        // register application resources
-//        register(PodcastResource.class);
-//        register(PodcastLegacyResource.class);
-//
-//        // register filters
-//        register(RequestContextFilter.class);
     }
 }
