@@ -1,9 +1,12 @@
 package com.learn.controller;
 
+import com.alibaba.druid.sql.visitor.functions.Char;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learn.model.User;
 import com.learn.model.base.PageList;
 import com.learn.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -39,7 +42,7 @@ public class UserController extends BaseController{
 
     @GET
     @Path("/look")
-    public User lookById(@QueryParam("id") int id){
+    public User lookById(@QueryParam("id") Integer id){
         return uService.lookById(id);
     }
 
@@ -69,16 +72,29 @@ public class UserController extends BaseController{
 
     @POST
     @Path("/drop")
-    public Map<String,Object> drop(JsonNode jsonnode){
-        Integer id = getJsonInt(jsonnode, "id", false);
-        uService.drop(id);
+    public Map<String,Object> drop(JsonNode jsonNode){
+
+       String ids = getJsonText(jsonNode,"ids",false);
+
+        String[] split = ids.split("\\,");
+
+
+        for(int i=0;i<split.length;i++){
+
+
+            Integer id =Integer.valueOf(split[i]);
+
+           // System.out.println(id+"===================================");
+            uService.drop(id);
+        }
+        System.out.println(split.toString());
         return returnMap(KEY_RESULT, "1");
     }
 
     @GET
     @Path("/selectUser")
     public PageList<User> selectUser(@QueryParam("offset") int offset,@QueryParam("length") int length){
-        return uService.getPage(offset,length);
+        return uService.getPage(offset, length);
     }
 
    /* private User getUserByJson(JsonNode jsonnode) {
@@ -97,9 +113,19 @@ public class UserController extends BaseController{
         return returnMap(KEY_RESULT, "1");
     }
 
+    @POST
+    @Path("/updateUser")
+    public Map<String,Object> updateUser(JsonNode jsonNode){
+        User user = getUserByJson(jsonNode);
+        uService.updateUser(user);
+        return returnMap(KEY_RESULT, "1");
+    }
+
     private User getUserByJson(JsonNode jsonnode){
         User user = new User();
         user.setId(getJsonInt(jsonnode, "id", false));
+        user.setPersId(getJsonInt(jsonnode,"persId",false));
+        user.setMgrId(getJsonInt(jsonnode, "mgrId",false));
         user.setEmail(getJsonText(jsonnode, "email", false));
         user.setPhone(getJsonText(jsonnode, "phone", false));
         user.setQq(getJsonText(jsonnode, "qq", false));
@@ -110,9 +136,13 @@ public class UserController extends BaseController{
         user.setAddress(getJsonText(jsonnode, "address", false));
         user.setBirthday(getJsonInt(jsonnode, "birthday", false));
         user.setDepId(getJsonInt(jsonnode, "depId", false));
-        user.setJob(getJsonText(jsonnode,"job",false));
+        user.setJob(getJsonText(jsonnode, "job", false));
+        user.setLeaderJob(getJsonText(jsonnode, "leaderJob",false));
         user.setPostal_address(getJsonText(jsonnode, "postal_address",false));
         user.setRemark(getJsonText(jsonnode,"remark",false));
         return user;
     }
+
+
+
 }

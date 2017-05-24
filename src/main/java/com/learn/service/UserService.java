@@ -15,10 +15,11 @@ import java.util.List;
  */
 public interface UserService {
     User look(String password);
-    User lookById(int id);
+    User lookById(Integer id);
     List<User> selectAllUser();
     void detail(Integer id,String password,String newpassword);
     void drop(Integer id);
     PageList<User> getPage(int offset,int length);
     void insertUser(User user);
+    void updateUser(User user);
 }

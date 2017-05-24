@@ -26,7 +26,7 @@ public class UserControllerTest extends BaseTest {
     @Test
     public void dropTest(){
         Map<String, Object> params = new HashMap<>();
-        params.put("id", 4);
+        params.put("ids","1,2,3");
         JsonNode res = httpPost("/user/drop", params);
         printObj(res);
     }
@@ -50,6 +50,28 @@ public class UserControllerTest extends BaseTest {
         params.put("mgrId",2);
         params.put("job","技工");
         JsonNode res = httpPost("/user/insertUser", params);
+        printObj(res);
+    }
+
+    @Test
+    public void updateUserTest(){
+        Map<String,Object> params = new HashMap<>();
+        params.put("id",11);
+        params.put("persId",200);
+        params.put("mgrId",200);
+        params.put("username","lihua");
+        params.put("job","Boss1");
+        params.put("phone","333333");
+        params.put("depId",8);
+        JsonNode res = httpPost("/user/updateUser",params);
+        printObj(res);
+    }
+
+    @Test
+    public void arrayTest(){
+        Map<String,Object> params = new HashMap<>();
+        params.put("ids",1&2&3);
+        JsonNode res = httpPost("/user/array",params);
         printObj(res);
     }
 }
