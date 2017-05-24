@@ -5,7 +5,7 @@ import com.learn.model.WorkDaily;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/5/20.
+ * Created by wangqingyu on 2017/5/20.
  */
 public interface WorkDailyService {
 

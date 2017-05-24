@@ -3,7 +3,7 @@ package com.learn.model;
 import com.learn.model.base.BaseModel;
 
 /**
- * Created by Administrator on 2017/5/18.
+ * Created by wangqingyu on 2017/5/18.
  */
 public class UserDepartment extends BaseModel {
 

@@ -1,8 +1,6 @@
 package com.learn.controller;
 
-import com.alibaba.druid.sql.visitor.functions.Char;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learn.model.User;
 import com.learn.model.base.PageList;
 import com.learn.service.UserService;
@@ -71,23 +69,14 @@ public class UserController extends BaseController{
     }
 
     @POST
-    @Path("/drop")
-    public Map<String,Object> drop(JsonNode jsonNode){
-
+    @Path("/delete")
+    public Map<String,Object> delete(JsonNode jsonNode){
        String ids = getJsonText(jsonNode,"ids",false);
-
-        String[] split = ids.split("\\,");
-
-
-        for(int i=0;i<split.length;i++){
-
-
-            Integer id =Integer.valueOf(split[i]);
-
-           // System.out.println(id+"===================================");
-            uService.drop(id);
+        String[] arrayIds = ids.split("\\,");//用","截取获取到的字符串并放到数组里
+        for(int i=0;i<arrayIds.length;i++){//循环数组
+            Integer id =Integer.valueOf(arrayIds[i]);//得到id值
+            uService.delete(id);
         }
-        System.out.println(split.toString());
         return returnMap(KEY_RESULT, "1");
     }
 

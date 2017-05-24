@@ -46,16 +46,16 @@
 
 
     <resultMap id="BaseResultMap3" type="com.learn.model.User">
-        <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="title" property="departName" jdbcType="VARCHAR"/>
         <result column="job" property="job" jdbcType="VARCHAR"/>
         <result column="leaderJob" property="leaderJob" jdbcType="VARCHAR"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="workPhone" property="workPhone" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="selectAllUser" resultMap="BaseResultMap3">
-        select us.id,us.username,p.title,us.job,u.job leaderJob,us.phone FROM (user u join user us on u.pers_id=us.mgr_id) left join position p on u.dep_id=p.id
+         select DISTINCT us.username ,p.title,us.job ,u.job leaderJob,us.phone,u.phone workPhone FROM ((user u join user us on us.mgr_id=u.pers_id) left join user_position up on u.dep_id = up.position_id ) join position p on us.dep_id=p.id  where u.del=0 and p.del=0
     </select>
 
 
@@ -177,4 +177,20 @@
         #{remark,jdbcType=VARCHAR}
         )
     </insert>
+
+    <update id="updateUser" parameterType="com.learn.model.User">
+        update user
+        <set>
+
+        username = #{username,jdbcType=VARCHAR},
+        pers_id = #{persId,jdbcType=INTEGER},
+        mgr_id = #{mgrId,jdbcType=INTEGER},
+        job = #{job,jdbcType=VARCHAR},
+        phone = #{phone,jdbcType=VARCHAR},
+        dep_id = #{depId,jdbcType=INTEGER},
+        update_time = unix_timestamp()
+
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

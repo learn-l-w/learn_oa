@@ -29,7 +29,7 @@ public class UserControllerTest extends BaseTest {
         params.put("ids","1,2,3");
         JsonNode res = httpPost("/user/drop", params);
         printObj(res);
-    }
+}
 
     @Test
     public void insertTest(){

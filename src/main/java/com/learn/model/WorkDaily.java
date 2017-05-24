@@ -3,7 +3,7 @@ package com.learn.model;
 import com.learn.model.base.BaseModel;
 
 /**
- * Created by Administrator on 2017/5/20.
+ * Created by wangqingyu on 2017/5/20.
  */
 public class WorkDaily extends BaseModel{
     private String title;

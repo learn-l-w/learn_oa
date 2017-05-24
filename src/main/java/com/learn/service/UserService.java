@@ -18,7 +18,7 @@ public interface UserService {
     User lookById(Integer id);
     List<User> selectAllUser();
     void detail(Integer id,String password,String newpassword);
-    void drop(Integer id);
+    void delete(Integer id);
     PageList<User> getPage(int offset,int length);
     void insertUser(User user);
     void updateUser(User user);

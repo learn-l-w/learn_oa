@@ -3,7 +3,7 @@ package com.learn.service;
 import com.learn.model.Department;
 
 /**
- * Created by Administrator on 2017/5/17.
+ * Created by wangqingyu on 2017/5/17.
  */
 public interface DepartmentService {
 

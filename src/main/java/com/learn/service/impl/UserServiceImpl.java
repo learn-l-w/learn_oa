@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService{
 
 
     @Override
-    public void drop(Integer id) {
+    public void delete(Integer id) {
 
         if(uDao.selectById(id) == null){
             throw new LearnException("此账号不存在");
