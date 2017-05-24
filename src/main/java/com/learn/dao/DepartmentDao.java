@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
- * Created by Administrator on 2017/5/17.
+ * Created by wangqingyu on 2017/5/17.
  */
 @Mapper
 public interface DepartmentDao {

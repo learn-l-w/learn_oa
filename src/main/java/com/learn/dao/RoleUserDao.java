@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/5/11.
+ * Created by wangqingyu on 2017/5/11.
  */
 @Mapper
 public interface RoleUserDao {

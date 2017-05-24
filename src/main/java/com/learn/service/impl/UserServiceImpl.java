@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User lookById(int id) {
+    public User lookById(Integer id) {
         User u = uDao.selectById(id);
         if(u==null){
             throw new LearnException("此用户id不存在");
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService{
 
 
     @Override
-    public void drop(Integer id) {
+    public void delete(Integer id) {
 
         if(uDao.selectById(id) == null){
             throw new LearnException("此账号不存在");
@@ -85,5 +85,10 @@ public class UserServiceImpl implements UserService{
     public void insertUser(User user) {
         user.setPassword(MD5Utils.getMD5String(user.getPassword()));
         uDao.insertUser(user);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        uDao.updateUser(user);
     }
 }

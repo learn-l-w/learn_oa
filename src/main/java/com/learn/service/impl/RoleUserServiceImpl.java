@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/5/11.
+ * Created by wangqingyu on 2017/5/11.
  */
 @Service
 public class RoleUserServiceImpl implements RoleUserService {

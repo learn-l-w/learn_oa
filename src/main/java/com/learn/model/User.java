@@ -16,6 +16,16 @@ public class User extends BaseModel {
     private String email;
     private String departName;
     private String phone;
+    private String workPhone;
+
+    public String getWorkPhone() {
+        return workPhone;
+    }
+
+    public void setWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
+    }
+
     private String qq;
     private String password;
     private int sex;

@@ -3,7 +3,7 @@ package com.learn.model;
 import com.learn.model.base.BaseModel;
 
 /**
- * Created by Administrator on 2017/5/11.
+ * Created by wangqingyu on 2017/5/11.
  */
 public class RoleUser extends BaseModel {
     private Integer userId;
