@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.learn.dao.AdressBookDao">
-    <resultMap id="BaseResultMap111" type="com.learn.model.AdressBook">
+<mapper namespace="com.learn.dao.AddressBookDao">
+    <resultMap id="BaseResultMap111" type="com.learn.model.AddressBook">
         <result column="id" property="id" jdbcType="INTEGER"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
@@ -20,13 +20,13 @@
         from user
         join position on user.dep_id = position.id
         where user.email like concat('%', #{email,jdbcType=VARCHAR}, '%')
-        or  user.phone like  concat( '%', #{phone,jdbcType=VARCHAR}, '%')
-        or  user.qq like concat('%', #{qq,jdbcType=VARCHAR}, '%')
+        or user.phone like  concat( '%', #{phone,jdbcType=VARCHAR}, '%')
+        or user.qq like concat('%', #{qq,jdbcType=VARCHAR}, '%')
         or position.title like concat('%', #{title,jdbcType=VARCHAR}, '%')
 
     </select>
 
-    <update id="update" parameterType="com.learn.model.AdressBook">
+    <update id="update" parameterType="com.learn.model.AddressBook">
           update user
           <set>
               email=#{email,jdbcType=VARCHAR},
