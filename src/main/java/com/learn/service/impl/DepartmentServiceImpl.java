@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by Administrator on 2017/5/17.
+ * Created by wangqingyu on 2017/5/17.
  */
 @Service
 public class DepartmentServiceImpl implements DepartmentService {

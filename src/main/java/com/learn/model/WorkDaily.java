@@ -3,14 +3,13 @@ package com.learn.model;
 import com.learn.model.base.BaseModel;
 
 /**
- * Created by wangqingyu on 2017/5/17.
+ * Created by wangqingyu on 2017/5/20.
  */
-public class Department extends BaseModel {
-
+public class WorkDaily extends BaseModel{
     private String title;
     private String remark;
 
-    public Department() {
+    public WorkDaily() {
     }
 
     public String getTitle() {
