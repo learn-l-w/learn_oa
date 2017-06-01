@@ -7,6 +7,8 @@ import com.learn.service.MeetingRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 /**
  * Created by Wangqingyu on 2017/5/25.
@@ -33,5 +35,10 @@ public class MeetingRoomServiceImpl implements MeetingRoomService {
     @Override
     public void updateMeetingRoom(MeetingRoom meetingRoom) {
         mrDao.updateMeetingRoom(meetingRoom);
+    }
+
+    @Override
+    public MeetingRoom selectMeetingRoomByNameId(Integer meetingRoomId) {
+        return mrDao.selectMeetingRoomByNameId(meetingRoomId);
     }
 }

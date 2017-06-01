@@ -10,6 +10,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,8 +33,8 @@ public class DepartmentController extends BaseController{
 
     @GET
     @Path("/select")
-    public Department selectDepartmentByName(@QueryParam("name") String name){
-       return dmService.selectDepartmentByName(name);
+    public Department selectDepartmentByName(@QueryParam("meetingDepartment") String meetingDepartment){
+       return dmService.selectDepartmentByName(meetingDepartment);
     }
 
     @POST
@@ -49,10 +50,11 @@ public class DepartmentController extends BaseController{
     @POST
     @Path("/delete")
     public Map<String,Object> deleteDepartment(JsonNode jsonNode){
-        Integer id = getJsonInt(jsonNode,"id",false);
+        Integer id = getJsonInt(jsonNode, "id", false);
         dmService.deleteDepartment(id);
         return returnMap(KEY_RESULT, "1");
     }
+
 
     private Department getDepartment(JsonNode jsonNode){
         Department department = new Department();
