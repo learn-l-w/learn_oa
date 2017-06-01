@@ -1,0 +1,3 @@
+dao只能被相对应的service调用
+controller只能调用相对应的service
+
