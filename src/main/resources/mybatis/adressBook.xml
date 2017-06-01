@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.learn.dao.AddressBookDao">
+    <resultMap id="BaseResultMap111" type="com.learn.model.AddressBook">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="qq" property="qq" jdbcType="VARCHAR"/>
+        <result column="time" property="time" jdbcType="INTEGER"/>
+        <result column="update_time" property="updateTime" jdbcType="INTEGER"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="job" property="job" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectFunction"  resultMap="BaseResultMap111" parameterType="java.util.Map">
+        select user.id,user.email,user.job,user.phone,user.qq,user.address,user.sex,user.time,user.update_time,position.title title
+        from user
+        join position on user.dep_id = position.id
+        where user.email like concat('%', #{email,jdbcType=VARCHAR}, '%')
+        or user.phone like  concat( '%', #{phone,jdbcType=VARCHAR}, '%')
+        or user.qq like concat('%', #{qq,jdbcType=VARCHAR}, '%')
+        or position.title like concat('%', #{title,jdbcType=VARCHAR}, '%')
+
+    </select>
+
+    <update id="update" parameterType="com.learn.model.AddressBook">
+          update user
+          <set>
+              email=#{email,jdbcType=VARCHAR},
+              phone=#{phone,jdbcType=VARCHAR},
+              qq=#{qq,jdbcType=VARCHAR},
+              sex=#{sex,jdbcType=INTEGER},
+              address=#{address,jdbcType=VARCHAR},
+              update_time=unix_timestamp()
+          </set>
+          where id = #{id,jdbcType=INTEGER}
+      </update>
+
+      <update id="delete" parameterType="java.lang.Integer">
+          update user
+          <set>
+              del = 1
+          </set>
+          where id=#{id,jdbcType=INTEGER}
+      </update>
+
+
+</mapper>
