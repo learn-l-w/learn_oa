@@ -43,7 +43,7 @@ public class RoleController extends BaseController{
 
     @POST
     @Path("/insert")
-    public Map<String,Object> insert(JsonNode jsonNode) throws IOException{
+    public Map<String,Object> insert(JsonNode jsonNode){
         Role role = getRoleByJson(jsonNode);
         roleService.insert(role);
         return returnMap(KEY_RESULT, "1");
@@ -51,7 +51,7 @@ public class RoleController extends BaseController{
 
     @POST
     @Path("/update")
-    public Map<String,Object> update(JsonNode jsonNode) throws IOException{
+    public Map<String,Object> update(JsonNode jsonNode){
         Role role = getRoleByJson(jsonNode);
         roleService.update(role);
         return returnMap(KEY_RESULT, "1");
@@ -65,17 +65,13 @@ public class RoleController extends BaseController{
         return returnMap(KEY_RESULT, "1");
     }
 
-    private Role getRoleByJson(JsonNode jsonNode) throws IOException {
+    private Role getRoleByJson(JsonNode jsonNode){
         Role role = new Role();
         role.setId(getJsonInt(jsonNode, "id", false));
-        String remark = getJsonText(jsonNode, "remark", false);
-        remark = URLEncoder.encode(remark, "utf-8");
-        role.setRemark(remark);
+        role.setRemark(getJsonText(jsonNode, "remark", false));
         role.setTime(getJsonInt(jsonNode, "time", false));
         role.setUpdateTime(getJsonInt(jsonNode, "updateTime", false));
-        String title = getJsonText(jsonNode, "title", false);
-        title = URLEncoder.encode(title, "utf-8");
-        role.setTitle(title);
+        role.setTitle(getJsonText(jsonNode, "title", false));
         return role;
     }
 

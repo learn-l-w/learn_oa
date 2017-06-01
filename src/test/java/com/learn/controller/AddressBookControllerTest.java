@@ -16,7 +16,7 @@ public class AddressBookControllerTest extends BaseTest {
     public void testUpdate() {
         Map<String, Object> params = new HashMap<>();
         params.put("id",1);
-        params.put("address","henansq");
+        params.put("address","北京");
         params.put("qq","henansq");
         params.put("email","www");
         params.put("sex","0");
