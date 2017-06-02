@@ -7,6 +7,8 @@ import com.learn.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by wangqingyu on 2017/5/17.
  */
@@ -22,18 +24,25 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department selectDepartmentByName(String name) {
-        return dmDao.selectDepartmentByName(name);
+    public Department selectDepartmentByName(String meetingDepartment) {
+        return dmDao.selectDepartmentByName(meetingDepartment);
 
     }
 
     @Override
     public void updateDepartment(Integer id,String title,String remark) {
-        dmDao.updateDepartment(id,title,remark);
+        dmDao.updateDepartment(id, title, remark);
     }
 
     @Override
     public void deleteDepartment(Integer id) {
         dmDao.deleteDepartment(id);
     }
+
+    @Override
+    public Department selectOneDepartmentByID(Integer depart_id) {
+        return dmDao.selectOneDepartmentByID(depart_id);
+    }
+
+
 }

@@ -12,7 +12,7 @@ import java.util.List;
  * Time: 上午15:26
  */
 @Mapper
-public interface UserDao {
+public interface UserDao{
 
     User selectByPassword(String passwor);
     User selectById(Integer id);

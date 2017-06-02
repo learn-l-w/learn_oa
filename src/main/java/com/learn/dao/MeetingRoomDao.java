@@ -15,5 +15,6 @@ public interface MeetingRoomDao {
     List<MeetingRoom> selectMeetingRoom(@Param("offset") int offset,@Param("length")int length,@Param("meetingRoomName")String meetingRoomName,@Param("meetingRoomNumber")int meetingRoomNumber);
     int getTotal(@Param("offset") int offset,@Param("length")int length,@Param("meetingRoomName")String meetingRoomName,@Param("meetingRoomNumber")int meetingRoomNumber);
     void updateMeetingRoom(MeetingRoom meetingRoom);
+    MeetingRoom selectMeetingRoomByNameId(Integer meetingRoomId);
 
 }
