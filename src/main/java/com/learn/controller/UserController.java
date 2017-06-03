@@ -98,6 +98,8 @@ public class UserController extends BaseController{
     @Path("/insertUser")
     public Map<String, Object> insertUser(JsonNode jsonnode){
         User user = getUserByJson(jsonnode);
+        System.out.println(user.getUsername()+"=====================");
+        System.out.println(user.getAddress()+"=====================");
         uService.insertUser(user);
         return returnMap(KEY_RESULT, "1");
     }

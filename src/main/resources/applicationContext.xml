@@ -153,6 +153,7 @@
         <property name="mapperInterface" value="com.learn.dao.MeetingRoomDao"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
+
     <bean id="ruDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
         <property name="mapperInterface" value="com.learn.dao.RoleUserDao"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
@@ -163,8 +164,13 @@
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 
-    <bean id="wdDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.learn.dao.WorkDailyDao"/>
+    <bean id="meetingWorkDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.learn.dao.MeetingWorkDao"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="newsProgramDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.learn.dao.NewsProgramDao"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
     <!--mybatis end-->
