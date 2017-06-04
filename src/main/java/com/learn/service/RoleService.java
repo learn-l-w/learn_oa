@@ -11,9 +11,9 @@ import com.learn.model.base.PageList;
  */
 public interface RoleService {
 
-    Role selectById(int id);
+    Role selectById(Integer id);
     void insert(Role role);
     void update(Role role);
-    void delete(int id);
+    void delete(Integer id);
     PageList<Role> getPage(int offset, int length);
 }
