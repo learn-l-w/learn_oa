@@ -26,7 +26,7 @@ public class AddressBookController extends BaseController{
     @GET
     @Path("/select")
     public List<AddressBook> select(@QueryParam("title") String title,@QueryParam("email") String email,@QueryParam("phone") String phone,@QueryParam("qq") String qq,@QueryParam("address") String address,@QueryParam("sex") int sex,@QueryParam("time") int time,@QueryParam("update_time") int update_time){
-
+        // TODO: 17/6/4 要考虑，少传几个参数，或者不传的情况
         return addressBookService.selectFunction(title,email,phone,qq,address,sex,time,update_time);
     }
 

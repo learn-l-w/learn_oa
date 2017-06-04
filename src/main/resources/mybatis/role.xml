@@ -63,7 +63,7 @@
             where id = #{id,jdbcType=INTEGER}
         </update>
 
-
+    <!--todo 是不是一个ResultMap就够了-->
     <resultMap id="BaseResultMap1" type="com.learn.model.Role">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>

@@ -27,6 +27,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User look(String password) {
+        // TODO: 17/6/4 有密码一样的用户怎么办？
+        // TODO: 17/6/4 命名要规范
        String passwor = MD5Utils.getMD5String(password);
         User s = uDao.selectByPassword(passwor);
 
@@ -50,6 +52,9 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void detail(Integer id,String password,String newpassword) {
+        // TODO: 17/6/4 函数名叫detail？
+
+        // TODO: 17/6/4 和上面问题一样  密码重复怎么办？假设用户表里有一百个用户，是不是蒙对一个就可以改密码了？
         String passwor = MD5Utils.getMD5String(password);
         if(uDao.selectByPassword(passwor)==null){
             throw new LearnException("账号或密码错误");
