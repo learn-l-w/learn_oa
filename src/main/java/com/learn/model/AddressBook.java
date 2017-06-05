@@ -15,7 +15,12 @@ public class AddressBook extends BaseModel{
     private int sex;
     private String address;
     private String job;
+    private String title;
+
     private String department;
+
+    public AddressBook() {
+    }
 
     public String getTitle() {
         return title;
@@ -23,13 +28,6 @@ public class AddressBook extends BaseModel{
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    private  String title;
-
-
-
-    public AddressBook() {
     }
 
     public String getUsername() {

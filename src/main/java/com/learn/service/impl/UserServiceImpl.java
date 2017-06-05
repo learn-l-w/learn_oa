@@ -26,6 +26,11 @@ public class UserServiceImpl implements UserService{
 
 
     @Override
+    public List<User> selectUserByAddressBook() {
+        return uDao.selectUserByAddressBook();
+    }
+
+    @Override
     public User look(String password) {
        String passwor = MD5Utils.getMD5String(password);
         User s = uDao.selectByPassword(passwor);

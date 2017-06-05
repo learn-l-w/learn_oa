@@ -13,6 +13,7 @@
         <result column="address" property="address" jdbcType="VARCHAR"/>
         <result column="job" property="job" jdbcType="VARCHAR"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="del" property="del" jdbcType="INTEGER"/>
     </resultMap>
 
     <select id="selectFunction"  resultMap="BaseResultMap111" parameterType="java.util.Map">

@@ -7,7 +7,6 @@ import com.learn.model.MeetingWork;
 import com.learn.service.DepartmentService;
 import com.learn.service.MeetingRoomService;
 import com.learn.service.MeetingWorkService;
-import org.apache.ibatis.scripting.xmltags.ForEachSqlNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +38,7 @@ public class MeetingWorkServiceImpl implements MeetingWorkService {
         for(MeetingWork meetingWork:meetingWorks){
             //根据会议室id查询会议室名称
             System.out.println(meetingWork.getMeetingRoomId()+"=meetingWork.getMeetingRoomId()-=-=-=-=-=-=-=-=-=-=-=-=-");
-           MeetingRoom meetingRoom = meetingRoomService.selectMeetingRoomByNameId(meetingWork.getMeetingRoomId());
+            MeetingRoom meetingRoom = meetingRoomService.selectMeetingRoomByNameId(meetingWork.getMeetingRoomId());
             //设置会议室名称
             meetingWork.setMeetingName(meetingRoom.getMeetingRoomName());
             //得到并赋值部门名称

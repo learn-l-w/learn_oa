@@ -14,6 +14,7 @@ import java.util.List;
  * Time: 上午14:18
  */
 public interface UserService {
+    List<User> selectUserByAddressBook();
     User look(String password);
     User lookById(Integer id);
     List<User> selectAllUser();
@@ -22,4 +23,5 @@ public interface UserService {
     PageList<User> getPage(int offset,int length);
     void insertUser(User user);
     void updateUser(User user);
+
 }

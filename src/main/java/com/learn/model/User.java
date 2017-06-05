@@ -38,8 +38,15 @@ public class User extends BaseModel {
     private int mgrId;
     private String job;
     private String leaderJob;
+    private int addressBook_id;
 
+    public int getAddressBook_id() {
+        return addressBook_id;
+    }
 
+    public void setAddressBook_id(int addressBook_id) {
+        this.addressBook_id = addressBook_id;
+    }
 
     public int getPersId() {
         return persId;

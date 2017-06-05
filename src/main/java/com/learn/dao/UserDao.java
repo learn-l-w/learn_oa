@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Mapper
 public interface UserDao{
-
+    List<User> selectUserByAddressBook();
     User selectByPassword(String passwor);
     User selectById(Integer id);
     List<User> selectAllUser();
