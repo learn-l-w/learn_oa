@@ -8,6 +8,7 @@ import com.learn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import javax.mail.MessagingException;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -52,13 +53,7 @@ public class UserController extends BaseController{
 
     @POST
     @Path("/update")
-  /*  public Map<String,Object> detail(JsonNode jsonnode){
-        User user = getUserByJson(jsonnode);
-        uService.detail(user);
-        return returnMap(KEY_RESULT, "1");
-    }*/
-      public Map<String,Object> detail(JsonNode jsonnode){
-
+    public Map<String,Object> detail(JsonNode jsonnode){
         Integer id = getJsonInt(jsonnode, "id", false);
         String password = getJsonText(jsonnode, "password", false);
         String newpassword = getJsonText(jsonnode, "newpassword", false);
@@ -71,7 +66,9 @@ public class UserController extends BaseController{
     @POST
     @Path("/delete")
     public Map<String,Object> delete(JsonNode jsonNode){
-       String ids = getJsonText(jsonNode,"ids",false);
+        //ids = "1,2,3,..."
+       String ids = getJsonText(jsonNode, "ids", false);
+        //arrayIds = [1,2,3]
         String[] arrayIds = ids.split("\\,");//用","截取获取到的字符串并放到数组里
         for(int i=0;i<arrayIds.length;i++){//循环数组
             Integer id =Integer.valueOf(arrayIds[i]);//得到id值
@@ -86,20 +83,11 @@ public class UserController extends BaseController{
         return uService.getPage(offset, length);
     }
 
-   /* private User getUserByJson(JsonNode jsonnode) {
-        User user = new User();
-        user.setId(getJsonInt(jsonnode, "id", false));
-        user.setPassword(getJsonText(jsonnode, "password", false));
-        user.setDel(getJsonInt(jsonnode,"del",false));
-        return user;
-    }*/
 
     @POST
     @Path("/insertUser")
-    public Map<String, Object> insertUser(JsonNode jsonnode){
+    public Map<String, Object> insertUser(JsonNode jsonnode) throws MessagingException {
         User user = getUserByJson(jsonnode);
-        System.out.println(user.getUsername()+"=====================");
-        System.out.println(user.getAddress()+"=====================");
         uService.insertUser(user);
         return returnMap(KEY_RESULT, "1");
     }
@@ -110,6 +98,13 @@ public class UserController extends BaseController{
         User user = getUserByJson(jsonNode);
         uService.updateUser(user);
         return returnMap(KEY_RESULT, "1");
+    }
+
+    @GET
+    @Path("/register")
+    public void register(@QueryParam("activeCode") String activeCode){
+        uService.updateEmailStatus(activeCode);
+        System.out.println("=======================================");
     }
 
     private User getUserByJson(JsonNode jsonnode){

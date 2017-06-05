@@ -3,6 +3,8 @@ package com.learn.model;
 
 import com.learn.model.base.BaseModel;
 
+import java.util.UUID;
+
 /**
  * Created with IntelliJ IDEA.
  * User: wangqingyu
@@ -13,19 +15,9 @@ public class User extends BaseModel {
 
 
     private String username;
-    private String email;
     private String departName;
     private String phone;
     private String workPhone;
-
-    public String getWorkPhone() {
-        return workPhone;
-    }
-
-    public void setWorkPhone(String workPhone) {
-        this.workPhone = workPhone;
-    }
-
     private String qq;
     private String password;
     private int sex;
@@ -38,8 +30,37 @@ public class User extends BaseModel {
     private int mgrId;
     private String job;
     private String leaderJob;
+    private String email;//注册账号
+    private int status;//激活状态
+    private String activeCode;//激活码
 
 
+
+
+    public String getWorkPhone() {
+        return workPhone;
+    }
+
+    public void setWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+
+    public String getActiveCode() {
+        return activeCode;
+    }
+
+    public void setActiveCode(String activeCode) {
+        this.activeCode = activeCode;
+    }
 
     public int getPersId() {
         return persId;

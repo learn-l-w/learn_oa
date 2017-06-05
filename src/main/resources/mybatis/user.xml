@@ -18,7 +18,8 @@
     </resultMap>
 
     <select id="selectByPassword" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select user.id,user.email,position.title,user.phone,user.username,user.qq,user.time,user.update_time,user.sex,user.address,user.birthday,user.postal_address,user.remark FROM user join position on user.dep_id=position.id where user.password = #{passwor,jdbcType=VARCHAR} and user.del = 0 and position.del=0
+        select user.id,user.email,position.title,user.phone,user.username,user.qq,user.time,user.update_time,user.sex,user.address,user.birthday,user.postal_address,user.remark FROM user join position
+        on user.dep_id=position.id where user.password = #{passwor,jdbcType=VARCHAR} and user.del = 0 and position.del=0
     </select>
 
 
@@ -142,7 +143,8 @@
         address,
         birthday,
         postal_address,
-        remark
+        remark,
+        active_code
         )
         values
         (
@@ -174,9 +176,24 @@
         #{address,jdbcType=VARCHAR},
         #{birthday,jdbcType=INTEGER},
         #{postal_address,jdbcType=VARCHAR},
-        #{remark,jdbcType=VARCHAR}
+        #{remark,jdbcType=VARCHAR},
+        #{activeCode,jdbcType=VARCHAR}
         )
     </insert>
+
+    <resultMap id="SelectUserByEmail" type="com.learn.model.User">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="email_status" property="status" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectUserByEmail" resultMap="SelectUserByEmail" parameterType="java.lang.String">
+        select email_status from user where email=#{email,jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateEmailStatus" parameterType="java.lang.String">
+        update user SET
+        email_status = 2
+        where active_code=#{activeCode,jdbcType=VARCHAR}
+    </update>
 
     <update id="updateUser" parameterType="com.learn.model.User">
         update user

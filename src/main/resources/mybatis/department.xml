@@ -29,7 +29,7 @@
         <result column="del" property="del" jdbcType="INTEGER"/>
     </resultMap>
     <select id="selectDepartmentByName" resultMap="BaseMap" parameterType="java.lang.String">
-          select id,title,remark,time,update_time,del from position where title = #{name,jdbcType=VARCHAR}
+          select id,title,remark,time,update_time,del from position where title like CONCAT('%', #{meetingDepartment,jdbcType=VARCHAR}, '%')
     </select>
 
     <update id="updateDepartment" parameterType="java.util.Map">
@@ -49,4 +49,12 @@
         </set>
         where id=#{id,jdbcType=INTEGER}
     </update>
+
+    <resultMap id="AllDepartmentResult" type="com.learn.model.Department">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectOneDepartmentByID" resultMap="AllDepartmentResult" parameterType="java.lang.Integer">
+        select title from position where del=0 and id=#{depart_id,jdbcType=INTEGER}
+    </select>
 </mapper>

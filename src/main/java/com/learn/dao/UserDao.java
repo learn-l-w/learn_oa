@@ -22,5 +22,7 @@ public interface UserDao{
     List<User> selectUser(@Param("offset") int offset,@Param("length") int length);
     int getTotal();
     void insertUser(User user);
+    User selectUserByEmail(String email);
+    void updateEmailStatus(String activeCode);
     void updateUser(User user);
 }
