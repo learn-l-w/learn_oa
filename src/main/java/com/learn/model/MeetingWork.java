@@ -3,7 +3,7 @@ package com.learn.model;
 import com.learn.model.base.BaseModel;
 
 /**
- * Created by Administrator on 2017/5/26.
+ * Created by Wangqingyu on 2017/5/26.
  */
 public class MeetingWork extends BaseModel{
 

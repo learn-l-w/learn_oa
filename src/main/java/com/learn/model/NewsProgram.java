@@ -3,7 +3,7 @@ package com.learn.model;
 import com.learn.model.base.BaseModel;
 
 /**
- * Created by Administrator on 2017/5/29.
+ * Created by Wangqingyu on 2017/5/29.
  */
 public class NewsProgram extends BaseModel {
 

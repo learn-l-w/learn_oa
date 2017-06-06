@@ -173,6 +173,11 @@
         <property name="mapperInterface" value="com.learn.dao.NewsProgramDao"/>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
+
+    <bean id="addressBookDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.learn.dao.AddressBookDao"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
     <!--mybatis end-->
 
 

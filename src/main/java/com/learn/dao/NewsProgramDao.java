@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/5/29.
+ * Created by Wangqingyu on 2017/5/29.
  */
 @Mapper
 public interface NewsProgramDao {

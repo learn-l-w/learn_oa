@@ -4,6 +4,7 @@ package com.learn.service;
 import com.learn.model.User;
 import com.learn.model.base.PageList;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 
@@ -21,7 +22,8 @@ public interface UserService {
     void detail(Integer id,String password,String newpassword);
     void delete(Integer id);
     PageList<User> getPage(int offset,int length);
-    void insertUser(User user);
+    void insertUser (User user) throws MessagingException;
     void updateUser(User user);
 
+    void updateEmailStatus(String activeCode);
 }

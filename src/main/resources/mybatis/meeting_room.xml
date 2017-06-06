@@ -17,7 +17,7 @@
 
 
     <resultMap id="BaseResultMap" type="com.learn.model.MeetingRoom">
-        <result column="id" property="id" jdbcType="INTEGER"/>
+        <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="meeting_room_name" property="meetingRoomName" jdbcType="VARCHAR"/>
         <result column="meeting_remark" property="meetingRemark" jdbcType="VARCHAR"/>
         <result column="meeting_nub" property="meetingRoomNumber" jdbcType="INTEGER"/>
@@ -41,5 +41,12 @@
         where id=#{id,jdbcType=INTEGER}
     </update>
 
+    <resultMap id="selectMeetingRoomByNameIdMap" type="com.learn.model.MeetingRoom">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="meeting_room_name" property="meetingRoomName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectMeetingRoomByNameId" resultMap="selectMeetingRoomByNameIdMap" parameterType="java.lang.Integer">
+        select meeting_room_name from meeting_room where id=#{meetingRoomId,jdbcType=INTEGER}
+    </select>
 
 </mapper>

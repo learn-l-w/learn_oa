@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.learn.dao.NewsProgramDao">
+
+    <resultMap id="SelectNews" type="com.learn.model.NewsProgram">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="news_name" property="newsName" jdbcType="VARCHAR"/>
+        <result column="father_id" property="fatherID" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="selectNews" resultMap="SelectNews">
+      select news_name,father_id from news
+    </select>
+
+
+    <resultMap id="SelectProgramName" type="com.learn.model.NewsProgram">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="program_name" property="programName" jdbcType="VARCHAR"/>
+        <result column="program_remark" property="programRemark" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectProgramName" resultMap="SelectProgramName" parameterType="INTEGER">
+        select program_name,program_remark from program where id=#{fatherID,jdbcType=INTEGER} and del=0
+    </select>
+
+
+    <resultMap id="SelectNewsByName" type="com.learn.model.NewsProgram">
+        <result column="news_name" property="newsName" jdbcType="VARCHAR"/>
+        <result column="program_name" property="programName" jdbcType="VARCHAR"/>
+        <result column="program_remark" property="programRemark" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectNewsByName" resultMap="SelectNewsByName" parameterType="java.util.List">
+        select news.news_name,program.program_name,program.program_remark from news join program on news.father_id=program.id
+        where news.del=0 and program.del=0 and news.news_name like concat('%',#{newsName,jdbcType=VARCHAR},'%') or program.program_name like concat('%',#{programName,jdbcType=VARCHAR},'%')
+    </select>
+    
+</mapper>
