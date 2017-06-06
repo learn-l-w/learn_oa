@@ -129,6 +129,7 @@ public class UserController extends BaseController{
         user.setDepId(getJsonInt(jsonnode, "depId", false));
         user.setJob(getJsonText(jsonnode, "job", false));
         user.setLeaderJob(getJsonText(jsonnode, "leaderJob",false));
+        // TODO: 17/6/4 命名规范 
         user.setPostal_address(getJsonText(jsonnode, "postal_address",false));
         user.setRemark(getJsonText(jsonnode,"remark",false));
         return user;

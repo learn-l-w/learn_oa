@@ -34,6 +34,7 @@ public class MeetingRoomController extends BaseController {
     @GET
     @Path("/selectMeetingRoom")
     public PageList<MeetingRoom> selectMeetingRoom(@QueryParam("offset") int offset,@QueryParam("length") int length,@QueryParam("meetingRoomName") String meetingRoomName,@QueryParam("meetingRoomNumber") int meetingRoomNumber){
+        // TODO: 17/6/4 要考虑参数少传或者不传的情况
       return mrService.selectMeetingRoom(offset, length, meetingRoomName, meetingRoomNumber);
     }
 

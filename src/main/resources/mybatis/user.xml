@@ -21,7 +21,7 @@
         select user.id,user.email,position.title,user.phone,user.username,user.qq,user.time,user.update_time,user.sex,user.address,user.birthday,user.postal_address,user.remark FROM user join position on user.dep_id=position.id where user.password = #{passwor,jdbcType=VARCHAR} and user.del = 0 and position.del=0
     </select>
 
-
+    <!--todo 为什么要写那么多BaseResultMap? 是不是一个就够了-->
     <resultMap id="BaseResultMap1" type="com.learn.model.User">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="email" property="email" jdbcType="VARCHAR"/>
