@@ -128,7 +128,4 @@ public class UserController extends BaseController{
         user.setRemark(getJsonText(jsonnode,"remark",false));
         return user;
     }
-
-
-
 }

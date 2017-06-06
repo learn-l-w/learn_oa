@@ -11,6 +11,7 @@ import javax.mail.internet.MimeMessage;
 import java.util.Date;
 import java.util.Properties;
 
+
 public class SendEmailUtil  {
 
     //获取用于发送邮件的Session

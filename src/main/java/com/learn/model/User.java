@@ -35,8 +35,6 @@ public class User extends BaseModel {
     private String activeCode;//激活码
 
 
-
-
     public String getWorkPhone() {
         return workPhone;
     }
