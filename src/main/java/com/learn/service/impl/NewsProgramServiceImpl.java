@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/5/29.
+ * Created by Wangqingyu on 2017/5/29.
  */
 @Service
 public class NewsProgramServiceImpl implements NewsProgramService {

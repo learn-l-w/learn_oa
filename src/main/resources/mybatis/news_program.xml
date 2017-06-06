@@ -31,4 +31,5 @@
         select news.news_name,program.program_name,program.program_remark from news join program on news.father_id=program.id
         where news.del=0 and program.del=0 and news.news_name like concat('%',#{newsName,jdbcType=VARCHAR},'%') or program.program_name like concat('%',#{programName,jdbcType=VARCHAR},'%')
     </select>
+    
 </mapper>
