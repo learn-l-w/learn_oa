@@ -20,6 +20,7 @@ public class NewsProgramServiceImpl implements NewsProgramService {
     @Override
     public List<NewsProgram> selectNewsProgram() {
        List<NewsProgram> newsList = newsProgramDao.selectNews();
+        // TODO: 17/6/4 原则上说，for循环里尽量不要写关于dao的代码，想想有什么办法能写到for外边
         for(NewsProgram news : newsList ){
             //根据新闻表的父ID去栏目表查询上级栏目名称
             NewsProgram newsProgram = newsProgramDao.selectProgramName(news.getFatherID());

@@ -41,6 +41,7 @@ public class RoleServiceImpl implements RoleService {
     public PageList<Role> getPage(int offset, int length){
         PageList<Role> pageList = new PageList<>();
         pageList.setList(roleDao.queryPage(offset, length));
+        // TODO: 17/6/4 total去哪了
         return pageList;
     }
 

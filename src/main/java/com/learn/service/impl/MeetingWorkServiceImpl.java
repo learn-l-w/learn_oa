@@ -32,9 +32,11 @@ public class MeetingWorkServiceImpl implements MeetingWorkService {
         //根据会议状态查询相应的会议数据
        List<MeetingWork> meetingWorks = mwDao.selectMeetingWorkByStatus(meetingStatus);
         //根据部门名称去查询相应的部门名称（模糊查询）
+        // TODO: 17/6/4 这个不是模糊查询，是否改成根据id查询更好，前端直接传id
         Department department = departmentService.selectDepartmentByName(meetingDepartment);
         for(MeetingWork meetingWork:meetingWorks){
             //根据会议室id查询会议室名称
+            // TODO: 17/6/4 for循环里尽量不要写有dao操作的代码，尽量写到外边，想想怎么写
            MeetingRoom meetingRoom = meetingRoomService.selectMeetingRoomByNameId(meetingWork.getMeetingRoomId());
             //设置会议室名称
             meetingWork.setMeetingRoomName(meetingRoom.getMeetingRoomName());
@@ -57,7 +59,10 @@ public class MeetingWorkServiceImpl implements MeetingWorkService {
     @Override
     public List<MeetingWork> selectAllMeetingWork() {
         List<MeetingWork> meetingWorkList = mwDao.selectAllMeetingWork();
-
+        // TODO: 17/6/4 还是for里不要写dao
+        // TODO: 17/6/4 如果meeting work有一万条数据，那此业务是不是会去mysql里查20001次？事实上三次就够了
+        // TODO: 17/6/4 咱们数据库服务器在美国，每次查询大概300毫秒，两万次你算算多少，光是一个查询就要数个小时
+        // TODO: 17/6/4 其实这就算是你说的大数据，数据量大了就要考虑的更多
         for(MeetingWork meetingWork:meetingWorkList){
             //获取部门id，去部门表查询,获取部门名称
             Department department = departmentService.selectOneDepartmentByID(meetingWork.getMeetingDepartmentId());
@@ -73,8 +78,8 @@ public class MeetingWorkServiceImpl implements MeetingWorkService {
     }
 
     //设置会议状态的方法
+    // TODO: 17/6/4 这个函数不要叫这个名字，有歧义
     private MeetingWork setMeetingStatusBySet(int startTime,int stopTime,MeetingWork meetingWork){
-
         int nowTime = (int) Calendar.getInstance().getTimeInMillis();//获取当前时间戳
         if(nowTime<startTime){
             meetingWork.setMeetingStatus("会议未开始");
