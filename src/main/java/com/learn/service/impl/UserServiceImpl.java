@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 
 /**
@@ -98,9 +95,13 @@ public class UserServiceImpl implements UserService{
         user.setActiveCode(uuid);//设置账户激活码
         String email = MD5Utils.getMD5String(user.getEmail());//加密邮件
         user.setPassword(MD5Utils.getMD5String(user.getPassword()));//密码加密
-        uDao.insertUser(user);
+        if(uDao.selectUserByEmail(user.getEmail())!=null){
+            throw new LearnException("邮箱"+user.getEmail()+"已经被注册");
+        }else{
+            uDao.insertUser(user);
+        }
         User emailStatus = uDao.selectUserByEmail(user.getEmail());
-        if(emailStatus.getStatus()==0){//邮箱没有被注册
+        if (emailStatus.getStatus()==0){//邮箱没有被激活
             //拼接邮件内容
             StringBuffer sb = new StringBuffer("尊敬的"+user.getUsername()+"先生您好，我爱您</br>");
             sb.append("<a href=\"http://localhost:8080/user/register?email=");
@@ -114,16 +115,19 @@ public class UserServiceImpl implements UserService{
             sb.append("</a>");
             //发送邮件
             SendEmailUtil.send(user.getEmail(), sb.toString());
-        }else{
-            throw new LearnException("邮箱"+user.getEmail()+"已经被注册");
         }
-
     }
 
     //根据邮箱修改账号激活状态
     @Override
     public void updateEmailStatus(String activeCode) {
-        uDao.updateEmailStatus(activeCode);
+        User user = uDao.selectTime(activeCode);//去用户表里获取注册时间
+        int nowTime = (int)Calendar.getInstance().getTimeInMillis();//获取当前时间戳
+        if((nowTime-user.getTime())>=48){//判断注册时间是否大于48小时
+            throw new LearnException("此链接已失效");
+        }else {
+            uDao.updateEmailStatus(activeCode);
+        }
     }
 
     @Override

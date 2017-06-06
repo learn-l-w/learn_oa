@@ -1,7 +1,7 @@
 package com.learn.util;
 
 /**
- * Created by Administrator on 2017/6/3.
+ * Created by Wangqingyu on 2017/6/3.
  */
 
 import javax.mail.*;

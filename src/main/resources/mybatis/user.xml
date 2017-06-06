@@ -184,10 +184,12 @@
     <resultMap id="SelectUserByEmail" type="com.learn.model.User">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="email_status" property="status" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
     </resultMap>
     <select id="selectUserByEmail" resultMap="SelectUserByEmail" parameterType="java.lang.String">
-        select email_status from user where email=#{email,jdbcType=VARCHAR}
+        select email_status,email from user where email=#{email,jdbcType=VARCHAR}
     </select>
+
 
     <update id="updateEmailStatus" parameterType="java.lang.String">
         update user SET
@@ -210,4 +212,9 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+
+    <select id="selectTime" resultType="com.learn.model.User" parameterType="java.lang.String">
+        select time,email_status from user where active_code=#{activeCode,jdbcType=VARCHAR}
+    </select>
 </mapper>

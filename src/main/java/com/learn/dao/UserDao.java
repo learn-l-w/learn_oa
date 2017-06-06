@@ -25,4 +25,5 @@ public interface UserDao{
     User selectUserByEmail(String email);
     void updateEmailStatus(String activeCode);
     void updateUser(User user);
+    User selectTime(String activeCode);
 }
